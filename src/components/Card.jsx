@@ -1,0 +1,40 @@
+import { useState } from "react";
+import React from "react";
+
+const Card = ({ card }) => {
+   const [showBack, setShowBack] = useState(false);
+
+   const handleClick = () => {
+      setShowBack(!showBack);
+   };
+
+   if (card) {
+      return (
+         <div className="outer-card" onClick={handleClick}>
+            <div className={"card " + (showBack ? "is-flipped" : "")}>
+               <div className="card-body d-flex justify-content-center align-items-center card__face card__face--front">
+                  {card.front}
+               </div>
+               <div className="card-body d-flex justify-content-center align-items-center card__face card__face--back">
+                  {card.back}
+               </div>
+            </div>
+         </div>
+      );
+   } else {
+      return (
+         <div className="outer-card" onClick={handleClick}>
+            <div className={"card " + (showBack ? "is-flipped" : "")}>
+               <div className="card-body d-flex justify-content-center align-items-center card__face card__face--front">
+                  
+               </div>
+               <div className="card-body d-flex justify-content-center align-items-center card__face card__face--back">
+                  
+               </div>
+            </div>
+         </div>
+      );
+   }
+};
+
+export default Card;

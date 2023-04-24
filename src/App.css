@@ -1,0 +1,108 @@
+
+
+.header {
+    height: 5rem;
+    border-bottom: 1px solid black;
+ 
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   align-items: center;
+}
+
+.add-deck {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.deck {
+    display: flex;
+    align-items: center;
+}
+
+.deck-name {
+    padding: 0 .5rem;
+}
+
+
+.deck-icon {
+    font-size: 1.5rem;
+    border: 1px solid black;
+    padding: 3px;
+    transition: .2s;
+}
+
+.deck-icon:hover
+{
+    font-size: 1.6rem;
+}
+
+.carousel {
+    width: 25rem;
+    height: 15rem;
+    display: flex;
+    align-items: center;
+    position: absolute;
+}
+
+.carousel-button {
+    height: 3rem;
+}
+
+.card-container {
+    width: 100%;
+    height: 100%;
+}
+
+.outer-card {
+    width: 100%;
+    height: 100%;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+  }
+
+
+  
+  .card__face {
+    /* padding: 1rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+  }
+  
+  .card__face--front {
+    background-image:
+      linear-gradient(180deg, white 3rem, #F0A4A4 calc(3rem), #F0A4A4 calc(3rem + 2px), transparent 1px),
+      repeating-linear-gradient(0deg, transparent, transparent 1.5rem, #DDD 1px, #DDD calc(1.5rem + 1px));
+    box-shadow: 1.5px 1.5px 3.5px rgba(0,0,0,.5);
+  }
+  
+  .card__face--back {
+    background-image:
+      linear-gradient(180deg, white 3rem, #F0A4A4 calc(3rem), #F0A4A4 calc(3rem + 2px), transparent 1px),
+      repeating-linear-gradient(0deg, transparent, transparent 1.5rem, #DDD 1px, #DDD calc(1.5rem + 1px));
+    box-shadow: 1.5px 1.5px 3.5px rgba(0,0,0,.5);
+    transform: rotateY( 180deg );
+  }
+  
+  .card.is-flipped {
+    transform: rotateY(180deg);
+  }
+
+  .icon {
+    fill: red;
+    stroke: red;
+    background-image: red;;
+    
+  }
