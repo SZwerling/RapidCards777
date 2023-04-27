@@ -48,17 +48,39 @@ const decksApi = createApi({
                 }
             }),
             deleteDeck: builder.mutation({
-                invalidatesTags: ['Deck'], //type: Card, id: deckId
+                invalidatesTags: ['Deck', 'Card'], //type: Card, id: deckId
                 query: (id) => {
                     return {
                         url: `/decks/${id}`,
                         method: 'DELETE'
                     }
                 }
+            }),
+            fetchCards: builder.query({
+                providesTags: ['Card'], //type: Card, id: deckId
+                query: (_id) => {
+                    return {
+                        url: `/cards/${_id}`,
+                        method: 'GET',
+                    }
+                }
+            }),
+            addCard: builder.mutation({
+                invalidatesTags: ['Card'],
+                query: (card) => {
+                    const {front, back, id} = card
+                    return {
+                        url: `/cards/${id}`,
+                        body: {
+                            front, back
+                        },
+                        method: 'POST',
+                    }   
+                }
             })
         }
     }
 })
 
-export const { useFetchDecksQuery, useAddDeckMutation, useEditDecksMutation, useDeleteDeckMutation } = decksApi;
+export const { useFetchDecksQuery, useAddDeckMutation, useEditDecksMutation, useDeleteDeckMutation, useFetchCardsQuery, useAddCardMutation } = decksApi;
 export { decksApi };

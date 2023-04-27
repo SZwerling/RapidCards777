@@ -32,6 +32,8 @@ const Carousel = ({ cards }) => {
          setShowBack(!showBack);
       };
 
+      const count = length > 0 ? `${index + 1} / ${length}` : '-- / --'
+
       return (
          <div className="carousel-counter">
             <div className="carousel">
@@ -47,7 +49,7 @@ const Carousel = ({ cards }) => {
                <FaAngleRight onClick={handleNext} />
             </div>
             <div className="count">
-               {index + 1} of {length}
+               {count}
             </div>
          </div>
       );
