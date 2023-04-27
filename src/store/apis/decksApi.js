@@ -48,7 +48,7 @@ const decksApi = createApi({
                 }
             }),
             deleteDeck: builder.mutation({
-                invalidatesTags: ['Deck'],
+                invalidatesTags: ['Deck'], //type: Card, id: deckId
                 query: (id) => {
                     return {
                         url: `/decks/${id}`,

@@ -15,7 +15,7 @@ const cardsApi = createApi({
     endpoints(builder) {
         return {
             fetchCards: builder.query({
-                providesTags: ['Card'],
+                providesTags: ['Card'], //type: Card, id: deckId
                 query: (_id) => {
                     return {
                         url: `/cards/${_id}`,
