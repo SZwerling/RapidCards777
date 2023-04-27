@@ -2,17 +2,15 @@ import React from 'react'
 import { useState } from 'react'
 import { useAddCardMutation } from '../store'
 import { useSelector } from 'react-redux'
-import cardSlice from '../store/slices/cardSlice'
 
 
-// need to get selected deck id
+
 
 const AddCard = () => {
     const [showInput, setShowInput] = useState(false)
     const [inputs, setInputs] = useState("");
     const [addCard, { data, isLoading, isError, error }] = useAddCardMutation();
     let _id = useSelector((state) => state.cardReducer.cards)
-    //console.log(_id)
     
 
     const handleChange = (event) => {
@@ -62,12 +60,12 @@ const AddCard = () => {
                      onChange={handleChange}
                   />
                </label>
-               <button className="btn btn-primary ml-2">submit</button>
+               <button className="btn">submit</button>
             </div>
          </form>
     } else {
         return (
-            <div><button onClick={() => setShowInput(true)}>AddCard</button></div>
+            <div><button className='btn' onClick={() => setShowInput(true)}>Add Card</button></div>
           )
     }
  

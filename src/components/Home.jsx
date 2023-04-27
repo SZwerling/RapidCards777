@@ -4,17 +4,15 @@ import Header from "./Header";
 import DisplayCards from "./DisplayCards";
 import AddDeck from "./AddDeck";
 
-
 const Home = () => {
-  
    return (
-      <>
-         <Header> 
+      <div className="home-container">
+         <Header>
             <AddDeck />
             <DecksDisplay />
          </Header>
          <DisplayCards />
-      </>
+      </div>
    );
 };
 
