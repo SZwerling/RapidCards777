@@ -11,12 +11,14 @@ function DisplayCards() {
 
    let content;
    if (isLoading) {
+      console.log(isLoading)
       content = "is loading";
    } else if (error) {
-      content = "error";
+      console.log(error)
+      content = <Carousel />;
    } else {
       let cards = data.map((card) => {
-         return { front: card.front, back: card.back };
+         return { front: card.front, back: card.back, _id: card._id };
       });
       content = <Carousel cards={cards} />;
    }

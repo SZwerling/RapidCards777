@@ -147,3 +147,37 @@
    transform: rotateY(180deg);
 }
 
+.card-edit {
+   width: 45rem;
+   height: 30rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-bottom: 0;
+   /* position: absolute; */
+}
+
+.btn-edit {
+   border: none;
+   font-size: 2rem;
+   padding: 1rem;
+   background: none;
+   outline: none;
+}
+
+.btn-edit:focus {
+   outline: none;
+}
+
+.card-edit-1 {
+   background-color:  #8feebd;
+   cursor: pointer;
+   width: 100%;
+   height: 51%;
+}
+.card-edit-2 {
+   background-color:  #fffb64;
+   cursor: pointer;
+   width: 100%;
+   height: 51%;
+}

@@ -40,7 +40,9 @@ const AddCard = () => {
             <div className="form-group justify-space-evenly">
                <label>
                   Front
-                  <input
+                  <textarea
+                     rows={10}
+                     cols={10}
                      className="form-control"
                      id="frontInput"
                      placeholder="front"
@@ -51,7 +53,9 @@ const AddCard = () => {
                </label>
                <label>
                   Back
-                  <input
+                  <textarea
+                     rows={5}
+                     cols={5}
                      className="form-control"
                      id="backInput"
                      placeholder="back"
