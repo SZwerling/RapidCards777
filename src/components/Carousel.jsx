@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import { useEditCardMutation } from "../store";
+import { useEditCardMutation, useDeleteCardMutation } from "../store";
 
 const Carousel = ({ cards }) => {
    const [editCard, { data, isLoading, isError, error }] = useEditCardMutation();
+   const [deleteCard, {deleteData, deleteIsLoading, deleteIsError, deleteError}] = useDeleteCardMutation();
    const [showBack, setShowBack] = useState(false);
    const [quick, setQuick] = useState({ transition: "transform: 1s" });
    const [edit, setEdit] = useState(false);
@@ -36,6 +37,10 @@ const Carousel = ({ cards }) => {
          const editObject = {front, back, id}
          editCard(editObject)
          setEdit(false)
+      }
+
+      const handleDelete = () => {
+         deleteCard(id)
       }
       
 
@@ -76,7 +81,7 @@ const Carousel = ({ cards }) => {
       } else {
          return (
             <div className="carousel-counter">
-               <button className="btn-edit" onClick={handleEdit}>edit</button>
+               <button className="btn-edit" onClick={handleEdit}>edit</button><button onClick={handleDelete} className="btn-edit">delete</button>
                <div className="carousel">
                   <FaAngleLeft onClick={handlePrevious} />
                   <div className="card-container">
