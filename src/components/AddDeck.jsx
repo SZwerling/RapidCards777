@@ -1,11 +1,13 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useAddDeckMutation } from "../store";
 
-function AddDeck() {
-   const [showInput, setShowInput] = useState(false);
+function AddDeck({showInput, setShowInput}) {
+   // const [showInput, setShowInput] = useState(false);
    const [currentValue, setCurrentValue] = useState('')
    const [addDeck, { data, isLoading, isError, error }] = useAddDeckMutation();
+
+
+   
 
    const handleAddDeck = async (e) => {
       e.preventDefault();

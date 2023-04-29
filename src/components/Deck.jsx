@@ -2,24 +2,19 @@ import React, { useState } from "react";
 import { setCards } from "../store/slices/cardSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { GrEdit, GrTrash } from "react-icons/Gr";
-import { useEditDecksMutation } from "../store";
-import { useDeleteDeckMutation } from "../store";
+import { useEditDecksMutation, useDeleteDeckMutation } from "../store";
 
 
 function Deck({ deck }) {
    const [showEdit, setShowEdit] = useState(false);
    const [value, setValue] = useState("");
 
- 
-
    let selectedId = useSelector((state) => state.cardReducer.cards);
 
-   const [editDeck, { data, isLoading, isError, error }] =
-      useEditDecksMutation();
-   const [
-      deleteDeck,
-      { deletData, deleteIsLoading, deleteIsError, deleteError },
-   ] = useDeleteDeckMutation();
+   const [editDeck, { data, isLoading, isError, error }] = useEditDecksMutation();
+
+   const [deleteDeck, { deletData, deleteIsLoading, deleteIsError, deleteError }] = useDeleteDeckMutation();
+
    const dispatch = useDispatch();
 
    const handleClick = (_id) => {

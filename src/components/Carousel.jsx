@@ -1,37 +1,28 @@
 import React, { useState, useEffect } from "react";
-import Card from "./Card";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import { useEditCardMutation, useDeleteCardMutation } from "../store";
+import { useEditCardMutation} from "../store";
+import Card from "./Card";
 
-const Carousel = ({ cards }) => {
+const Carousel = ({ cards, edit, setEdit, index, setIndex, front, setFront, back, setBack }) => {
    const [editCard, { data, isLoading, isError, error }] = useEditCardMutation();
-   const [deleteCard, {deleteData, deleteIsLoading, deleteIsError, deleteError}] = useDeleteCardMutation();
+   
    const [showBack, setShowBack] = useState(false);
    const [quick, setQuick] = useState({ transition: "transform: 1s" });
-   const [edit, setEdit] = useState(false);
-   const [index, setIndex] = useState(0);
-   const [front, setFront] = useState('')
-   const [back, setBack] = useState('')
+  
    
    
+ 
 
    useEffect(() => {
       setQuick({});
    }, [showBack]);
-
-   const handleEdit = () => {
-      if(cards.length > 0){
-         setFront(cards[index].front)
-         setBack(cards[index].back)
-      }
-      setEdit(!edit);
-   };
   
 
-   if (cards && cards.length > 0) {
+   if (cards?.length > 0) {
     
       const length = cards.length;
-      const id = cards[index]._id
+      const id = cards[index]?._id
+
 
       const handleSubmitEdit = () => {
          const editObject = {front, back, id}
@@ -39,10 +30,6 @@ const Carousel = ({ cards }) => {
          setEdit(false)
       }
 
-      const handleDelete = () => {
-         deleteCard(id)
-      }
-      
 
       const handlePrevious = () => {
          showBack ? setQuick({ transition: "transform 0s" }) : setQuick({});
@@ -81,7 +68,6 @@ const Carousel = ({ cards }) => {
       } else {
          return (
             <div className="carousel-counter">
-               <button className="btn-edit" onClick={handleEdit}>edit</button><button onClick={handleDelete} className="btn-edit">delete</button>
                <div className="carousel">
                   <FaAngleLeft onClick={handlePrevious} />
                   <div className="card-container">
@@ -105,10 +91,6 @@ const Carousel = ({ cards }) => {
                <FaAngleLeft />
                <div className="card-container">
                   <Card
-                  // card={cards[index]}
-                  // showBack={showBack}
-                  // handleClick={handleClick}
-                  // quick={quick}
                   ></Card>
                </div>
                <FaAngleRight />
