@@ -15,10 +15,10 @@ function DisplayCards() {
    const [index, setIndex] = useState(0);
    const [showAddCard, setShowAddCard] = useState(false);
    const [front, setFront] = useState('');
-   const [newFront, setNewFront] = useState("");
+   const [newFront, setNewFront] = useState('');
    const [back, setBack] = useState('');
-   const [newBack, setNewBack] = useState("");
-   const [sortAlphabetically, setSortAlphabetically] = useState(false);
+   const [newBack, setNewBack] = useState('');
+   const [sort, setSort] = useState('');
    const [
       deleteCard,
       { deleteData, deleteIsLoading, deleteIsError, deleteError },
@@ -27,9 +27,10 @@ function DisplayCards() {
       useAddCardMutation();
 
    let _id = useSelector((state) => state.cardReducer.cards);
+   let fetchCardsObject = {_id: _id, sort: sort}
 
    const { data, isLoading, isSuccess, isError, error } =
-      useFetchCardsQuery(_id);
+      useFetchCardsQuery(fetchCardsObject);
 
       let cards;
    
@@ -39,7 +40,7 @@ function DisplayCards() {
       setEdit(true);
    };
 
-   const handleAddCard = (id) => {
+   const handleAddCard = async (id) => {
       const cardObj = {
          front: newFront,
          back: newBack,
@@ -49,7 +50,11 @@ function DisplayCards() {
       setShowAddCard(false);
       setNewBack("");
       setNewFront("");
-      setIndex(cards.length)
+      if(sort === "front:asc"){
+         setIndex(0)
+      } else {
+         setIndex(cards.length)
+      }
    };
 
    const handleDelete = () => {
@@ -59,35 +64,29 @@ function DisplayCards() {
    };
 
    const handleSortAlph = () => {
-      setSortAlphabetically(!sortAlphabetically);
+      setSort("front:asc");
       setIndex(0);
       setFront(cards[index].front)
       setBack(cards[index].back)
    };
 
+   const handleSortRecent = () => {
+      setSort("createdAt:asc");
+      setIndex(0);
+      setFront(cards[index].front)
+      setBack(cards[index].back)
+   }
+
    let content;
    if (isLoading) {
       content = <LoadingCarousel />;
    } else if (error) {
-      console.log(error.data.error);
+      
       content = <Carousel />;
    } else {
       cards = data.map((card) => {
          return { front: card.front, back: card.back, _id: card._id };
       });
-      if (sortAlphabetically) {
-         cards.sort((a, b) => {
-            const frontA = a.front.toUpperCase();
-            const frontB = b.front.toUpperCase();
-            if (frontA < frontB) {
-               return -1;
-            }
-            if (frontA > frontB) {
-               return 1;
-            }
-            return 0;
-         });
-      }
       content = (
          <Carousel
             cards={cards}
@@ -133,7 +132,7 @@ function DisplayCards() {
             <div onClick={handleDelete}>Delete</div>
             <div onClick={handleSortAlph}>Alphabetcially</div>
      
-            <div>Most Recent</div>
+            <div onClick={handleSortRecent}>Most Recent</div>
          </div>
          <div className="card-content">{content}</div>
       </div>

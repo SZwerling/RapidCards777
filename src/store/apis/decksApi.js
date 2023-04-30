@@ -58,9 +58,12 @@ const decksApi = createApi({
          }),
          fetchCards: builder.query({
             providesTags: ["Card"], //type: Card, id: deckId
-            query: (_id) => {
+            query: ({_id, sort}) => {
                return {
                   url: `/cards/${_id}`,
+                  params: {
+                     sortBy: sort
+                  },
                   method: "GET",
                };
             },
@@ -117,3 +120,11 @@ export const {
    useDeleteCardMutation,
 } = decksApi;
 export { decksApi };
+
+
+// params: {
+//    userId: user.id
+//    sortBy: user.sort //
+// },
+
+// user.sort = "front:asc" // "createdAt:asc"

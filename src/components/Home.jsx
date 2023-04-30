@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFetchDecksQuery } from "../store";
 import { setCards } from "../store/slices/cardSlice";
 
@@ -12,15 +12,18 @@ import Deck from "./Deck";
 
 const Home = () => {
    const [showInput, setShowInput] = useState(false);
-
    const dispatch = useDispatch();
-
+   const clientName = useSelector((state) => state.auth.name) 
+   //let selectedId = useSelector((state) => state.cardReducer.cards);
    const { data, isLoading, isSuccess, isError, error } = useFetchDecksQuery();
+   const { userData, useIsLoading, userIsSuccess, userIsError, userError } = useFetchDecksQuery();
+
+   
 
    let firstId;
    let show;
-
    let content;
+
    if (isLoading) {
       content = "";
    } else if (error) {
@@ -38,6 +41,8 @@ const Home = () => {
       }
    }
 
+
+
    useEffect(() => {
       if (firstId) {
          dispatch(setCards(firstId));
@@ -53,6 +58,10 @@ const Home = () => {
    return (
       <div className="home-container">
          <Header>
+            <div style={{margin: "0 1rem 0 0"}}>
+            Hello {clientName}
+            </div>
+           
             <AddDeck showInput={showInput} setShowInput={setShowInput} />
             {content}
          </Header>
