@@ -7,7 +7,8 @@ const usersApi = createApi({
         baseUrl: 'http://localhost:3000',
       //  credentials: 'include',
         prepareHeaders: (headers, { getState }) => {
-            const token = getState().auth.token
+           // const token = getState().auth.token
+            const token = localStorage.getItem("jwt")
             if(token){
                 headers.set("Authorization", `Bearer ${token}`)
             }

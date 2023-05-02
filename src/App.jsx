@@ -5,6 +5,7 @@ import Layout from "./components/Layout";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Welcome from "./components/Welcome";
+import Profile from "./components/Profile";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
          <Route path="login" element={<Login />} />
          {/* private routes */}
          <Route path="home" element={<Home />} />
+         <Route path="home/profile" element={<Profile />} />
          <Route />
       </Routes>
    );

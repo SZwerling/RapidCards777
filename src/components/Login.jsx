@@ -25,6 +25,7 @@ const Login = () => {
          const { user, token } = await login(inputs).unwrap();
          const { name, email, _id } = user;
 
+         localStorage.setItem("jwt", token)
          dispatch(setCredentials({ name, email, _id, token }));
          navigate("/home");
          

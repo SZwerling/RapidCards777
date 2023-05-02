@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useFetchDecksQuery } from "../store";
+import { useFetchDecksQuery, useFetchUsersQuery } from "../store";
 import { setCards } from "../store/slices/cardSlice";
+import { Link } from "react-router-dom";
 
 import Header from "./Header";
 import DisplayCards from "./DisplayCards";
@@ -13,16 +14,29 @@ import Deck from "./Deck";
 const Home = () => {
    const [showInput, setShowInput] = useState(false);
    const dispatch = useDispatch();
-   const clientName = useSelector((state) => state.auth.name) 
-   //let selectedId = useSelector((state) => state.cardReducer.cards);
+   const { data: user, isLoading:userIsLoading, userError } = useFetchUsersQuery();
    const { data, isLoading, isSuccess, isError, error } = useFetchDecksQuery();
-   const { userData, useIsLoading, userIsSuccess, userIsError, userError } = useFetchDecksQuery();
+   
 
    
 
    let firstId;
    let show;
    let content;
+   let clientName;
+
+   if(userIsLoading){
+      clientName = 'loading'
+   } else if(userError){
+      clientName = 'error'
+   } else {
+      clientName = user
+   }
+
+ 
+   
+   
+   
 
    if (isLoading) {
       content = "";
@@ -59,7 +73,7 @@ const Home = () => {
       <div className="home-container">
          <Header>
             <div style={{margin: "0 1rem 0 0"}}>
-            Hello {clientName}
+            Hello <Link to='/profile'>{clientName.name}</Link>
             </div>
            
             <AddDeck showInput={showInput} setShowInput={setShowInput} />

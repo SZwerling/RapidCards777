@@ -26,6 +26,7 @@ function AddPerson() {
          const { user, token } = await addProfile(inputs).unwrap();
          const { name, email, _id } = user;
          console.log(name, email, _id, token);
+         localStorage.setItem("jwt", token)
          dispatch(setCredentials({ name, email, _id, token }));
          //reset inputs
          navigate("/home");
