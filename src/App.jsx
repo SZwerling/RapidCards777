@@ -18,7 +18,7 @@ function App() {
          <Route path="login" element={<Login />} />
          {/* private routes */}
          <Route path="home" element={<Home />} />
-         <Route path="home/profile" element={<Profile />} />
+         <Route path="profile" element={<Profile />} />
          <Route />
       </Routes>
    );

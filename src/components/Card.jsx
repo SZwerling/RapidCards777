@@ -5,7 +5,7 @@ const Card = ({ card, handleClick, showBack, quick }) => {
 
    if (card) {
       return (
-         <div className="outer-card" onClick={handleClick}>
+         <div className="outer-card" onClick={handleClick} >
             <div className={"card " + (showBack ? "is-flipped" : "")} style={quick}>
                <div className="card-body card__face card__face--front">
                   {card.front}

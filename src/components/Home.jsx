@@ -73,7 +73,7 @@ const Home = () => {
       <div className="home-container">
          <Header>
             <div style={{margin: "0 1rem 0 0"}}>
-            Hello <Link to='/profile'>{clientName.name}</Link>
+            Hello <Link state={clientName} to='/profile'>{clientName.name}</Link>
             </div>
            
             <AddDeck showInput={showInput} setShowInput={setShowInput} />

@@ -70,8 +70,8 @@ const Carousel = ({ cards, edit, setEdit, index, setIndex, front, setFront, back
             <div className="carousel-counter">
                <div className="carousel">
                   <FaAngleLeft onClick={handlePrevious} />
-                  <div className="card-container">
-                     <Card
+                  <div className="card-container" >
+                     <Card 
                         card={cards[index]}
                         showBack={showBack}
                         handleClick={handleClick}

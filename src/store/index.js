@@ -32,6 +32,8 @@ export {
    useFetchUsersQuery,
    useAddUserMutation,
    useLoginUserMutation,
+   useAddAvatarMutation,
+   useEditUserMutation,
 } from "./apis/usersApi";
 export {
    useFetchDecksQuery,
