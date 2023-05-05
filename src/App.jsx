@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Welcome from "./components/Welcome";
 import Profile from "./components/Profile";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
 function App() {
