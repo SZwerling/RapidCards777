@@ -21,6 +21,10 @@ const CarouselComp = ({
    const [showBack, setShowBack] = useState(false);
    const [quick, setQuick] = useState({ transition: "transform: 1s" });
 
+   const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
+
    useEffect(() => {
       setQuick({});
    }, [showBack]);
@@ -35,25 +39,25 @@ const CarouselComp = ({
          setEdit(false);
       };
 
-      const handlePrevious = () => {
-         showBack ? setQuick({ transition: "transform 0s" }) : setQuick({});
-         const newIndex = index - 1;
-         setIndex(newIndex < 0 ? length - 1 : newIndex);
-         setFront(
-            newIndex < 0 ? cards[length - 1].front : cards[newIndex].front
-         );
-         setBack(newIndex < 0 ? cards[length - 1].back : cards[newIndex].back);
-         setShowBack(false);
-      };
+      // const handlePrevious = () => {
+      //    showBack ? setQuick({ transition: "transform 0s" }) : setQuick({});
+      //    const newIndex = index - 1;
+      //    setIndex(newIndex < 0 ? length - 1 : newIndex);
+      //    setFront(
+      //       newIndex < 0 ? cards[length - 1].front : cards[newIndex].front
+      //    );
+      //    setBack(newIndex < 0 ? cards[length - 1].back : cards[newIndex].back);
+      //    setShowBack(false);
+      // };
 
-      const handleNext = () => {
-         showBack ? setQuick({ transition: "transform 0s" }) : setQuick({});
-         const newIndex = index + 1;
-         setIndex(newIndex >= length ? 0 : newIndex);
-         setFront(newIndex >= length ? cards[0].front : cards[newIndex].front);
-         setBack(newIndex >= length ? cards[0].back : cards[newIndex].back);
-         setShowBack(false);
-      };
+      // const handleNext = () => {
+      //    showBack ? setQuick({ transition: "transform 0s" }) : setQuick({});
+      //    const newIndex = index + 1;
+      //    setIndex(newIndex >= length ? 0 : newIndex);
+      //    setFront(newIndex >= length ? cards[0].front : cards[newIndex].front);
+      //    setBack(newIndex >= length ? cards[0].back : cards[newIndex].back);
+      //    setShowBack(false);
+      // };
 
       const handleClick = () => {
          setShowBack(!showBack);
@@ -61,21 +65,19 @@ const CarouselComp = ({
 
       const count = length > 0 ? `${index + 1} / ${length}` : "-- / --";
 
-      console.log(cards)
-
       const renderedCards = cards.map((card) => {
          return (
-                <Card key={card._id}
-                        card={card}
-                        showBack={showBack}
-                        handleClick={handleClick}
-                        quick={quick}
-                        
-                     ></Card>
+            <Carousel.Item key={card._id}>
+               <Card
+                  card={card}
+                  showBack={showBack}
+                  handleClick={handleClick}
+                  quick={quick}
+               ></Card>
+               {card.front}
+            </Carousel.Item>
          );
       });
-
-     
 
       if (edit) {
          return (
@@ -98,7 +100,18 @@ const CarouselComp = ({
             </div>
          );
       } else {
-         return <Carousel>{renderedCards}</Carousel>;
+         return (
+            <Carousel
+               className="carousel"
+               activeIndex={index}
+               onSelect={handleSelect}
+               indicators={true}
+               interval={null}
+               touch={true}
+            >
+               {renderedCards}
+            </Carousel>
+         );
       }
    } else {
       return (
