@@ -24,13 +24,13 @@ function AddDeck({showInput, setShowInput}) {
    if (showInput) {
       return (
          <form className="add-deck-form" onSubmit={handleAddDeck}>
-            <input autoFocus value={currentValue} onChange={(e) => setCurrentValue(e.target.value)}/>
+            <input className="add-deck-form-input" autoFocus value={currentValue} onChange={(e) => setCurrentValue(e.target.value)}/>
          </form>
       );
    } else {
       return (
          <div className="add-deck">
-            <button className="btn add-deck-btn" onClick={() => setShowInput(true)}>add deck</button>
+            <button className="btn btn-outline-dark add-deck-btn" onClick={() => setShowInput(true)}>Add Deck</button>
          </div>
       );
    }

@@ -1,15 +1,33 @@
-import React from 'react'
-import { Link } from "react-router-dom"
-import Header from './Header'
+import React from "react";
+import { Link } from "react-router-dom";
+import Header from "./Header";
+import Nav from "react-bootstrap/Nav";
+import Container from 'react-bootstrap/Container';
 
 const Welcome = () => {
-  return (
-      <Header>
-      <div>Welcome</div>
-        <Link to="/addperson">Sign Up</Link>
-        <Link to="/login">Log In</Link>
-      </Header>
-  )
-}
+   return (
+      <>
+         <Header>
+          <Container className="pl-1 pr-1">
+            <Nav.Item>
+               <div>Welcome</div>
+            </Nav.Item>
+            <Nav.Item>
+               <Link className="welcome-link" to="/addperson">
+                  Sign Up
+               </Link>
+            </Nav.Item>
+
+            <Nav.Item>
+               <Link className="welcome-link" to="/login">
+                  Log In
+               </Link>
+            </Nav.Item>
+            </Container>
+         </Header>
+         <div className="below-header container-fluid"></div>
+      </>
+   );
+};
 
 export default Welcome;

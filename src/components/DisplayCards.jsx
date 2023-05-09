@@ -9,16 +9,15 @@ import Carousel from "./Carousel";
 import NewCard from "./NewCard";
 import LoadingCarousel from "./LoadingCarousel";
 
-
 function DisplayCards() {
    const [edit, setEdit] = useState(false);
    const [index, setIndex] = useState(0);
    const [showAddCard, setShowAddCard] = useState(false);
-   const [front, setFront] = useState('');
-   const [newFront, setNewFront] = useState('');
-   const [back, setBack] = useState('');
-   const [newBack, setNewBack] = useState('');
-   const [sort, setSort] = useState('');
+   const [front, setFront] = useState("");
+   const [newFront, setNewFront] = useState("");
+   const [back, setBack] = useState("");
+   const [newBack, setNewBack] = useState("");
+   const [sort, setSort] = useState("");
    const [
       deleteCard,
       { deleteData, deleteIsLoading, deleteIsError, deleteError },
@@ -27,33 +26,39 @@ function DisplayCards() {
       useAddCardMutation();
 
    let _id = useSelector((state) => state.cardReducer.cards);
-   let fetchCardsObject = {_id: _id, sort: sort}
+   let fetchCardsObject = { _id: _id, sort: sort };
 
    const { data, isLoading, isSuccess, isError, error } =
       useFetchCardsQuery(fetchCardsObject);
 
-      let cards;
-   
+   let cards;
+
    const handleEdit = () => {
-      setBack(cards[index].back)
-      setFront(cards[index].front)
+      setBack(cards[index].back);
+      setFront(cards[index].front);
       setEdit(true);
    };
 
    const handleAddCard = async (id) => {
-      const cardObj = {
-         front: newFront,
-         back: newBack,
-         id,
-      };
-      addCard(cardObj);
-      setShowAddCard(false);
-      setNewBack("");
-      setNewFront("");
-      if(sort === "front:asc"){
-         setIndex(0)
+      if (newFront && newBack) {
+         const cardObj = {
+            front: newFront,
+            back: newBack,
+            id,
+         };
+         addCard(cardObj);
+         setShowAddCard(false);
+         setNewBack("");
+         setNewFront("");
+         if (sort === "front:asc") {
+            setIndex(0);
+         } else {
+            setIndex(cards.length);
+         }
       } else {
-         setIndex(cards.length)
+         setNewBack("");
+         setNewFront("");
+         setShowAddCard(false);
       }
    };
 
@@ -66,22 +71,21 @@ function DisplayCards() {
    const handleSortAlph = () => {
       setSort("front:asc");
       setIndex(0);
-      setFront(cards[index].front)
-      setBack(cards[index].back)
+      setFront(cards[index].front);
+      setBack(cards[index].back);
    };
 
    const handleSortRecent = () => {
       setSort("createdAt:asc");
       setIndex(0);
-      setFront(cards[index].front)
-      setBack(cards[index].back)
-   }
+      setFront(cards[index].front);
+      setBack(cards[index].back);
+   };
 
    let content;
    if (isLoading) {
       content = <LoadingCarousel />;
    } else if (error) {
-      
       content = <Carousel />;
    } else {
       cards = data.map((card) => {
@@ -102,9 +106,6 @@ function DisplayCards() {
       );
    }
 
-  
-   
-
    if (showAddCard) {
       content = (
          <NewCard
@@ -114,27 +115,32 @@ function DisplayCards() {
             newFront={newFront}
             handleAddCard={handleAddCard}
             _id={_id}
-            
          />
       );
    }
 
-   
    return (
-      <div className="display">
-         <div className="choices">
-            <div onClick={() => setShowAddCard(!showAddCard)}>New Card</div>
-            {data?.length > 0 ? (
-               <div onClick={handleEdit}>Edit</div>
-            ) : (
-               <div></div>
-            )}
-            <div onClick={handleDelete}>Delete</div>
-            <div onClick={handleSortAlph}>Alphabetcially</div>
-     
-            <div onClick={handleSortRecent}>Most Recent</div>
+      <div
+         className="container-fluid"
+         style={{ backgroundColor: "#F4F4F4", color: "#333333" }}
+      >
+         <div className="row">
+            <div className="col-12 col-md-4">
+               <div onClick={() => setShowAddCard(!showAddCard)}>New Card</div>
+               {data?.length > 0 ? (
+                  <>
+                     <div onClick={handleEdit}>Edit</div>
+                     <div onClick={handleDelete}>Delete</div>
+                     <div onClick={handleSortAlph}>Alphabetcially</div>
+
+                     <div onClick={handleSortRecent}>Most Recent</div>
+                  </>
+               ) : (
+                  <div></div>
+               )}
+            </div>
+            <div className="col-12 col-md-7">{content}</div>
          </div>
-         <div className="card-content">{content}</div>
       </div>
    );
 }

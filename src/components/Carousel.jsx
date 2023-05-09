@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { useEditCardMutation } from "../store";
 import Carousel from "react-bootstrap/Carousel";
@@ -22,12 +22,16 @@ const CarouselComp = ({
    const [quick, setQuick] = useState({ transition: "transform: 1s" });
 
    const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
+      showBack ? setQuick({ transition: "transform 0s" }) : setQuick({});
+      setShowBack(false);
+      setIndex(selectedIndex);
+   };
 
    useEffect(() => {
       setQuick({});
    }, [showBack]);
+
+
 
    if (cards?.length > 0) {
       const length = cards.length;
@@ -39,31 +43,13 @@ const CarouselComp = ({
          setEdit(false);
       };
 
-      // const handlePrevious = () => {
-      //    showBack ? setQuick({ transition: "transform 0s" }) : setQuick({});
-      //    const newIndex = index - 1;
-      //    setIndex(newIndex < 0 ? length - 1 : newIndex);
-      //    setFront(
-      //       newIndex < 0 ? cards[length - 1].front : cards[newIndex].front
-      //    );
-      //    setBack(newIndex < 0 ? cards[length - 1].back : cards[newIndex].back);
-      //    setShowBack(false);
-      // };
 
-      // const handleNext = () => {
-      //    showBack ? setQuick({ transition: "transform 0s" }) : setQuick({});
-      //    const newIndex = index + 1;
-      //    setIndex(newIndex >= length ? 0 : newIndex);
-      //    setFront(newIndex >= length ? cards[0].front : cards[newIndex].front);
-      //    setBack(newIndex >= length ? cards[0].back : cards[newIndex].back);
-      //    setShowBack(false);
-      // };
 
       const handleClick = () => {
          setShowBack(!showBack);
       };
 
-      const count = length > 0 ? `${index + 1} / ${length}` : "-- / --";
+      const count = length > 0 ? <div style={{fontSize: 15, padding: 0, margin: 0}}>{index + 1} / {length}</div> : "-- / --";
 
       const renderedCards = cards.map((card) => {
          return (
@@ -74,7 +60,6 @@ const CarouselComp = ({
                   handleClick={handleClick}
                   quick={quick}
                ></Card>
-               {card.front}
             </Carousel.Item>
          );
       });
@@ -90,41 +75,56 @@ const CarouselComp = ({
                      onChange={(e) => setFront(e.target.value)}
                      value={front}
                      className="card-edit-1"
+                     maxLength={"95"}
                   ></textarea>
                   <textarea
                      onChange={(e) => setBack(e.target.value)}
                      value={back}
                      className="card-edit-2"
+                     maxLength={"95"}
                   ></textarea>
                </form>
             </div>
          );
       } else {
          return (
-            <Carousel
-               className="carousel"
-               activeIndex={index}
-               onSelect={handleSelect}
-               indicators={true}
-               interval={null}
-               touch={true}
-            >
-               {renderedCards}
-            </Carousel>
+            <div className="carousel-counter">
+               <>
+                  <Carousel
+                     className="carousel"
+                     activeIndex={index}
+                     onSelect={handleSelect}
+                     indicators={false}
+                     interval={null}
+                     touch={true}
+                     controls={true}
+                  >
+                     {renderedCards}
+                  </Carousel>
+               </>
+               {count}
+            </div>
          );
       }
    } else {
       return (
-         <div className="carousel-counter">
-            <div className="carousel">
-               <FaAngleLeft />
-               <div className="card-container">
-                  <Card></Card>
-               </div>
-               <FaAngleRight />
-            </div>
-            <div className="count">-- / --</div>
-         </div>
+        <div className="carousel-counter">
+        <>
+           <Carousel
+              className="carousel"
+              indicators={false}
+              interval={null}
+              touch={true}
+              controls={true}
+           >
+             <Carousel.Item>
+               <Card
+               ></Card>
+            </Carousel.Item>
+           </Carousel>
+        </>
+        -- / --
+     </div>
       );
    }
 };
@@ -148,3 +148,24 @@ export default CarouselComp;
                <div className="count">{count}</div>
             </div> */
 }
+
+
+      // const handlePrevious = () => {
+      //    showBack ? setQuick({ transition: "transform 0s" }) : setQuick({});
+      //    const newIndex = index - 1;
+      //    setIndex(newIndex < 0 ? length - 1 : newIndex);
+      //    setFront(
+      //       newIndex < 0 ? cards[length - 1].front : cards[newIndex].front
+      //    );
+      //    setBack(newIndex < 0 ? cards[length - 1].back : cards[newIndex].back);
+      //    setShowBack(false);
+      // };
+
+      // const handleNext = () => {
+      //    showBack ? setQuick({ transition: "transform 0s" }) : setQuick({});
+      //    const newIndex = index + 1;
+      //    setIndex(newIndex >= length ? 0 : newIndex);
+      //    setFront(newIndex >= length ? cards[0].front : cards[newIndex].front);
+      //    setBack(newIndex >= length ? cards[0].back : cards[newIndex].back);
+      //    setShowBack(false);
+      // };

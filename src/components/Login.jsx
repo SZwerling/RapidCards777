@@ -25,10 +25,9 @@ const Login = () => {
          const { user, token } = await login(inputs).unwrap();
          const { name, email, _id } = user;
 
-         localStorage.setItem("jwt", token)
+         localStorage.setItem("jwt", token);
          dispatch(setCredentials({ name, email, _id, token }));
          navigate("/home");
-         
       } catch (error) {
          console.log(error);
       }
@@ -37,35 +36,45 @@ const Login = () => {
    useEffect(() => {}, []);
 
    return (
-      <Header>
-         <form className="form-inline" onSubmit={handleAddUser}>
-            <div className="form-group justify-space-evenly">
-               <label>
-                  Email:
-                  <input
-                     className="form-control"
-                     id="emailInput"
-                     placeholder="email"
-                     name="email"
-                     value={inputs.email || ""}
-                     onChange={handleChange}
-                  />
-               </label>
-               <label>
-                  Password
-                  <input
-                     className="form-control"
-                     id="passwordInput"
-                     placeholder="password"
-                     name="password"
-                     value={inputs.password || ""}
-                     onChange={handleChange}
-                  />
-               </label>
-               <button className="btn btn-primary ml-2">submit</button>
-            </div>
-         </form>
-      </Header>
+      <>
+         <Header>SOME STUFF IN THE HEADER</Header>
+         <div className="below-header container-fluid">
+            <form
+               className="row pb-5"
+               onSubmit={handleAddUser}
+            >
+               <div className="form-group justify-space-evenly mb-2">
+                  <label htmlFor="emailInput">
+                     Email
+                     <input
+                        className="form-control"
+                        id="emailInput"
+                        placeholder="email"
+                        name="email"
+                        value={inputs.email || ""}
+                        onChange={handleChange}
+                     />
+                  </label>
+               </div>
+               <div className="form-group justify-space-evenly mb-2">
+                  <label htmlFor="passwordInput">
+                     Password
+                     <input
+                        className="form-control"
+                        id="passwordInput"
+                        placeholder="password"
+                        name="password"
+                        value={inputs.password || ""}
+                        onChange={handleChange}
+                     />
+                  </label>
+               </div>
+               <div>
+                  <button className="btn btn-primary">submit</button>
+               </div>
+            </form>
+         </div>
+      </>
    );
 };
 

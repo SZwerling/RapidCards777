@@ -43,6 +43,8 @@ function Deck({ deck }) {
       }
    };
 
+   const textColor = selectedId === deck._id ? 'white' : '' 
+
    if (showEdit) {
       return (
          <form onSubmit={handleEditSubmit}>
@@ -66,7 +68,7 @@ function Deck({ deck }) {
                ""
             )}
 
-            <div className="deck-name" onClick={() => handleClick(deck._id)}>
+            <div className="deck-name" style={{color: textColor}} onClick={() => handleClick(deck._id)}>
                {deck.name}
             </div>
             {selectedId === deck._id ? (
