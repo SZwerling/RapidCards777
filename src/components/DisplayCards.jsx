@@ -5,6 +5,7 @@ import {
    useDeleteCardMutation,
    useAddCardMutation,
 } from "../store";
+import Row from "react-bootstrap/Row";
 import Carousel from "./Carousel";
 import NewCard from "./NewCard";
 import LoadingCarousel from "./LoadingCarousel";
@@ -76,7 +77,7 @@ function DisplayCards() {
    };
 
    const handleSortRecent = () => {
-      setSort("createdAt:asc");
+      setSort("createdAt:des");
       setIndex(0);
       setFront(cards[index].front);
       setBack(cards[index].back);
@@ -124,8 +125,8 @@ function DisplayCards() {
          className="container-fluid"
          style={{ backgroundColor: "#F4F4F4", color: "#333333" }}
       >
-         <div className="row">
-            <div className="col-12 col-md-4">
+         <Row>
+            <div className="col-md-4 pt-md-5">
                <div onClick={() => setShowAddCard(!showAddCard)}>New Card</div>
                {data?.length > 0 ? (
                   <>
@@ -133,14 +134,14 @@ function DisplayCards() {
                      <div onClick={handleDelete}>Delete</div>
                      <div onClick={handleSortAlph}>Alphabetcially</div>
 
-                     <div onClick={handleSortRecent}>Most Recent</div>
+                     <div onClick={handleSortRecent}>Chronologically</div>
                   </>
                ) : (
                   <div></div>
                )}
             </div>
-            <div className="col-12 col-md-7">{content}</div>
-         </div>
+            <div className="col">{content}</div>
+         </Row>
       </div>
    );
 }

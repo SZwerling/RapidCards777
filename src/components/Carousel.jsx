@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { useEditCardMutation } from "../store";
 import Carousel from "react-bootstrap/Carousel";
 import Card from "./Card";

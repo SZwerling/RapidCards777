@@ -7,7 +7,7 @@ const usersApi = createApi({
       //  credentials: 'include',
       prepareHeaders: (headers, { getState }) => {
          // const token = getState().auth.token
-         const token = localStorage.getItem("jwt");
+         const token = getState().auth.token || localStorage.getItem("jwt");
          if (token) {
             headers.set("Authorization", `Bearer ${token}`);
          }
@@ -48,7 +48,6 @@ const usersApi = createApi({
          }),
          editUser: builder.mutation({
             query: (inputs) => {
-                console.log(inputs)
                 return {
                     url: '/users/me',
                     method: 'PATCH',
@@ -70,15 +69,48 @@ const usersApi = createApi({
                };
             },
          }),
+         fetchAvatar: builder.query({
+            query: (id) => {
+               return {
+                  url: `/users/${id}/avatar`,
+                  method: "GET",
+               };
+            },
+         }),
+         requestPassword: builder.mutation({
+            query: (email) => {
+               return {
+                  url: `/users/passwordReset`,
+                  method: "POST",
+                  body: {
+                     email
+                  }
+               }
+            }
+         }),
+         resetPassword: builder.mutation({
+            query: (update) => {
+               return {
+                  url: `/users/reset`,
+                  method: "POST",
+                  body: {
+                     tempPassword: update.tempPassword, password: update.password
+                  }
+               };
+            }
+         })
       };
    },
 });
 
 export const {
    useFetchUsersQuery,
+   useFetchAvatarQuery,
    useAddUserMutation,
    useLoginUserMutation,
    useAddAvatarMutation,
    useEditUserMutation,
+   useRequestPasswordMutation,
+   useResetPasswordMutation,
 } = usersApi;
 export { usersApi };

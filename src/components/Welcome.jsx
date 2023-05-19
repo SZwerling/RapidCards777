@@ -10,7 +10,7 @@ const Welcome = () => {
          <Header>
           <Container className="pl-1 pr-1">
             <Nav.Item>
-               <div>Welcome</div>
+               <div>RAPID CARDS</div>
             </Nav.Item>
             <Nav.Item>
                <Link className="welcome-link" to="/addperson">

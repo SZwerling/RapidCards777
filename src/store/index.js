@@ -30,10 +30,13 @@ export { store };
 
 export {
    useFetchUsersQuery,
+   useFetchAvatarQuery,
    useAddUserMutation,
    useLoginUserMutation,
    useAddAvatarMutation,
    useEditUserMutation,
+   useRequestPasswordMutation,
+   useResetPasswordMutation,
 } from "./apis/usersApi";
 export {
    useFetchDecksQuery,

@@ -1,40 +1,46 @@
-
 Header {
-   background-color: #0077CC;
+   background-color: var(--main-blue);
 }
 
+.avatar {
+   width: 100px !important;
+}
+
+@media only screen and (max-width: 768px) {
+   .avatar {
+      width: 75px !important;
+   }
+}
+
+
+a {
+   cursor: pointer;
+}
+
+
+.modal-title {
+ font-size: 1rem;
+}
 
 .welcome-link {
    text-decoration: none;
-   color: #333333;
+   color: inherit;
 }
 
 .welcome-link:hover {
-   color: #FFC107;
+   color: var(--yellow-two);
 }
 
-.link  {
+.link {
    font-size: 1rem;
-  text-decoration: none;
-  color: #333333;
-  margin-right: 3rem;
+   text-decoration: none;
+   color: inherit;
+   margin-right: 3rem;
 }
 
 .link:hover {
-   color: #FFC107;
+   color: var(--yellow-two);
 }
-/* .btn {
-  border: none;
-  font-size: inherit;
-  font-family: inherit;
-  padding: 0;
-  transition: .3s;
-}
-
-.btn:hover {
-  background-color: #eee;
-} */
-
 
 .add-deck-btn {
    font-size: 1.2rem;
@@ -42,14 +48,14 @@ Header {
 }
 
 .add-deck-form-input {
-  width: 8rem;
-  border: none;
-  border-radius: 10px;
-  background-color: whitesmoke;
+   width: 8rem;
+   border: none;
+   border-radius: 10px;
+   background-color: var(--light-gray);
 }
 
 .deck {
-  margin: 0 .5rem;
+   margin: 0 0.5rem;
    display: flex;
    align-items: center;
 }
@@ -60,66 +66,46 @@ Header {
 
 .deck-icon {
    font-size: 1.2rem;
-   border: 1px solid black;
+   border: 1px solid;
    padding: 3px;
    transition: 0.2s;
-   background-color: #FFC107;
+   background-color: #ffc107;
 }
 
 .deck-icon:hover {
    font-size: 1.4rem;
 }
 
-
-
-
 .carousel {
    width: 35rem;
    overflow-wrap: break-word;
 }
 
+.carousel-counter {
+   width: 35rem;
+}
 
-
-/* .count {
-  font-size: 1rem;
-  padding: .5rem;
-  display: inline-block;
-  width: 5rem;
-  margin-left: 3.5rem;
-  margin-top: .5rem;
-} */
-
-/* .card-content {
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-  margin: 0 auto;
-  font-size: 3rem;
-} */
-/* .card-container {
-  cursor: pointer;
+.card-container {
+   cursor: pointer;
    width: 100%;
-   height: 40rem;
-}  */
+}
 
 .outer-card {
-  perspective: 2500px;
+   perspective: 2500px;
    width: 100%;
    /* height: 30rem; */
 }
-
 
 /* CURRENTLY SETTING HEIGHT HERE */
 .card {
    font-size: 3rem;
    width: 100%;
-   height: 30rem;    
+   height: 30rem;
    position: relative;
    transition: transform 1s;
    transform-style: preserve-3d;
    border: none;
-   background-color: #F4F4F4;
- 
+   background-color: var(--light-gray);
 }
 
 /* height and margin set to avoid clipping of flip */
@@ -135,16 +121,43 @@ Header {
    margin: 3rem 0;
    border: none;
    backface-visibility: hidden;
-   background-color: #8feebd; 
+   background-color: var(--card-green);
+}
+
+@media only screen and (max-width: 768px) {
+
+   .card {
+      width: 90vw;
+      margin: 0 auto;
+      font-size: 2rem;
+   }
+   .card__face {
+      width: 90vw;
+      margin: 5 auto;
+   }
+   .outer-card {
+      perspective: 2500px;
+      width: 90vw;
+      margin: 0 auto;
+   }
+   .carousel {
+      width: 90vw;
+      overflow-wrap: break-word;
+      margin: 0 auto;
+   }
+   .carousel-counter {
+      width: 90vw;
+      margin: 0 auto;
+   }
 }
 
 .card__face--front {
- background-color:  #8feebd;
+   background-color: var(--card-green);
    box-shadow: 1.5px 1.5px 3.5px rgba(0, 0, 0, 0.5);
 }
 
 .card__face--back {
-   background-color:  #fffb64;
+   background-color: var(--card-yellow);
    box-shadow: 1.5px 1.5px 3.5px rgba(0, 0, 0, 0.5);
    transform: rotateY(180deg);
 }
@@ -153,9 +166,15 @@ Header {
    transform: rotateY(180deg);
 }
 
+.card-edit-container {
+   width: 35rem;
+   position: relative;
+   margin-top: 48px;
+}
+
 .card-edit {
-   width: 45rem;
-   height: 30rem;
+   width: 35rem;
+   height: 25rem;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -163,10 +182,25 @@ Header {
    /* position: absolute; */
 }
 
+@media only screen and (max-width: 768px) {
+   .card-edit {
+      width: 90vw;
+      margin: 5 auto;
+   }
+   .card-edit-container {
+      width: 90vw;
+      margin: 5 auto;
+   }
+}
+
 .btn-edit {
-   border: none;
-   font-size: 2rem;
-   padding: 1rem;
+   position: absolute;
+   bottom: 5px;
+   right: 5px;
+   border: 1px solid black;
+   border-radius: 5%;
+   font-size: 1rem;
+   padding: 0.5rem;
    background: none;
    outline: none;
 }
@@ -176,13 +210,13 @@ Header {
 }
 
 .card-edit-1 {
-   background-color:  #8feebd;
+   background-color: var(--card-green);
    cursor: pointer;
    width: 100%;
    height: 51%;
 }
 .card-edit-2 {
-   background-color:  #fffb64;
+   background-color: var(--card-yellow);
    cursor: pointer;
    width: 100%;
    height: 51%;
@@ -191,44 +225,50 @@ Header {
 .carousel-control-prev-icon {
    margin-left: -10rem;
    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5L4.25 4l2.5-2.5L5.25 0z'/%3e%3c/svg%3e");
- }
-     
- .carousel-control-next-icon {
+}
+
+.carousel-control-next-icon {
    margin-right: -10rem;
    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5L3.75 4l-2.5 2.5L2.75 8l4-4-4-4z'/%3e%3c/svg%3e");
- }
+}
 
- .below-header {
+@media only screen and (max-width: 768px) {
+   .carousel-control-prev {
+      display: none;
+   }
+   .carousel-control-next {
+      display: none;
+   }
+}
+
+.below-header {
    height: 82.3vh;
    width: 100%;
    /* display: flex;
    align-items: center;
    justify-content: center; */
-   background: url('../src/assets/colored-squares.jpg');
-   background-size: cover; 
-   background-position: center;
-   
-   /* position: relative; */
-   
- }
-
- /* .below-header::before {
-   content: "";
-   position: absolute;
-   background-image: url('../src/assets/colored-squares.jpg');
-   background-position: center;
+   background: url("../src/assets/colored-squares.jpg");
    background-size: cover;
-   top: 0px;
-   right: 0px;
-   bottom: 0px;
-   left: 0px;
-   opacity: .0;
-} */
-
-.below-header form {
-   background-color: rgba(143, 238, 189, .4);
+   background-position: center;
 }
 
+.below-header form {
+   background-color: rgba(143, 238, 189, 0.4);
+}
+
+
+.update-profile {
+   background: url("../src/assets/colored-squares.jpg");
+   background-size: cover;
+   background-position: center;
+   height: 100vh;
+}
+
+@media only screen and (max-width: 915px) {
+   .update-profile form {
+      background-color: rgba(143, 238, 189, 0.4);
+   }
+}
 
 /* 
  Primary color: #0077CC (a blue shade) - Use this color for the main elements of the application, such as the header, buttons, and active states.
