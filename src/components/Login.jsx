@@ -19,7 +19,7 @@ const Login = () => {
       setShow(false);
       setEmail("");
    };
-   
+
    const handleShow = () => setShow(true);
 
    const handleEmailSubmit = (e) => {
@@ -55,12 +55,12 @@ const Login = () => {
       }
    };
 
-   
-
    return (
       <>
          <Header>
-            <div className="navbar-brand">RAPID CARDS</div>
+            <div className="d-flex p-2 bd-highlight w-100 justify-content-center">
+               <div className="rapid-cards">RAPID CARDS</div>
+            </div>
          </Header>
          <div className="below-header container-fluid">
             <form className="row pb-3" onSubmit={handleAddUser}>

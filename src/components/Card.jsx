@@ -21,9 +21,8 @@ const Card = ({ card, handleClick, showBack, quick }) => {
    } else {
       return (
          <div className="outer-card" onClick={handleClick}>
-            <div className={"card " + (showBack ? "is-flipped" : "")}>
+            <div className="card ">
                <div className="card-body card__face card__face--front"></div>
-               <div className="card-body card__face card__face--back"></div>
             </div>
          </div>
       );

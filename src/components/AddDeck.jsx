@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAddDeckMutation } from "../store";
 
-function AddDeck({showInput, setShowInput}) {
+function AddDeck({showInput, setShowInput, show}) {
    // const [showInput, setShowInput] = useState(false);
    const [currentValue, setCurrentValue] = useState('')
    const [addDeck, { data, isLoading, isError, error }] = useAddDeckMutation();
@@ -24,13 +24,14 @@ function AddDeck({showInput, setShowInput}) {
    if (showInput) {
       return (
          <form className="add-deck-form" onSubmit={handleAddDeck}>
-            <input className="add-deck-form-input" autoFocus value={currentValue} onChange={(e) => setCurrentValue(e.target.value)}/>
+            <input className="add-deck-form-input add-deck-component" autoFocus value={currentValue} onChange={(e) => setCurrentValue(e.target.value)}/>
+            {show && (<span> &#x270E; add your first deck</span>)}
          </form>
       );
    } else {
       return (
-         <div className="add-deck">
-            <button className="btn btn-outline-dark add-deck-btn" onClick={() => setShowInput(true)}>Add Deck</button>
+         <div className="add-deck add-deck-component">
+            <button className="btn add-deck-btn" onClick={() => setShowInput(true)}>Add Deck</button>
          </div>
       );
    }

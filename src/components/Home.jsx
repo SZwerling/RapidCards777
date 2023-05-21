@@ -5,7 +5,7 @@ import { setCards } from "../store/slices/cardSlice";
 import { Link } from "react-router-dom";
 import emptyAvatar from "../assets/empty-avatar.jpg";
 
-import Container from "react-bootstrap/Container";
+
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Modal from "react-bootstrap/Modal";
@@ -26,8 +26,7 @@ const Home = () => {
    let show;
    let content;
 
-
-   let clientName = fetchUser()
+   let clientName = fetchUser();
 
    if (isLoading) {
       content = "";
@@ -46,7 +45,7 @@ const Home = () => {
          });
       } else {
          show = true;
-         content = <div>&lt;--add your first deck</div>;
+         content = <div></div>;
       }
    }
 
@@ -69,34 +68,36 @@ const Home = () => {
    return (
       <>
          <Header>
-            <Container>
+            <div className="container-fluid">
                <Navbar.Brand>
-                  {" "}
-                  <img
-                     src={`http://localhost:3000/users/${clientName._id}/avatar`}
-                     className="rounded-circle d-inline-block align-top avatar"
-                     // style={{ width: 10 }}
-                     alt="Avatar"
-                     onError={onImageError}
-                  />
+                  <Link className="link" state={clientName} to="/profile">
+                     <img
+                        src={`http://localhost:3000/users/${clientName._id}/avatar`}
+                        className="rounded-circle d-inline-block align-top avatar"
+                        alt="Avatar"
+                        onError={onImageError}
+                     />
+                  </Link>
                </Navbar.Brand>
                <Nav.Item>
-                  <Link className="link" state={clientName} to="/profile">
+                  <Link className="client-name" state={clientName} to="/profile">
                      {clientName.name}
                   </Link>
                </Nav.Item>
 
                <Navbar.Toggle
-                  style={{ fontSize: ".8rem" }}
+                  className="ms-auto"
                   aria-controls="basic-navbar-nav"
                />
-               <Navbar.Collapse id="basic-navbar-nav">
-                  <AddDeck showInput={showInput} setShowInput={setShowInput} />
+               <Navbar.Collapse className={show ? 'show' : '' } id="basic-navbar-nav">
+               <hr/>
+                  <AddDeck  show={show} showInput={showInput} setShowInput={setShowInput} />
+                  <hr/>
                   <div className="d-flex flex-wrap">{content}</div>
                </Navbar.Collapse>
-            </Container>
+            </div>
          </Header>
-         {clientName==='error' && (
+         {clientName === "error" && (
             <Modal
                show
                style={{ fontSize: "4rem" }}
@@ -106,7 +107,9 @@ const Home = () => {
             >
                <Modal.Body>
                   <h4>401 Not Authorized</h4>
-                  <Link style={{textDecoration: "none"}} to={"/welcome"}>Please Log In.</Link>
+                  <Link style={{ textDecoration: "none" }} to={"/welcome"}>
+                     Please Log In.
+                  </Link>
                </Modal.Body>
             </Modal>
          )}

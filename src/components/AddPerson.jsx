@@ -25,7 +25,7 @@ function AddPerson() {
       try {
          const { user, token } = await addProfile(inputs).unwrap();
          const { name, email, _id } = user;
-         
+
          localStorage.setItem("jwt", token);
          dispatch(setCredentials({ name, email, _id, token }));
          //reset inputs
@@ -39,7 +39,11 @@ function AddPerson() {
 
    return (
       <>
-         <Header>RAPID CARDS</Header>
+         <Header>
+            <div className="d-flex p-2 bd-highlight w-100 justify-content-center">
+               <div className="rapid-cards">RAPID CARDS</div>
+            </div>
+         </Header>
          <div className="below-header container-fluid">
             <form className="row pb-5" onSubmit={handleAddUser}>
                <div className="form-group justify-space-evenly mb-2">

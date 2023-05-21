@@ -48,7 +48,7 @@ const CarouselComp = ({
          setShowBack(!showBack);
       };
 
-      const count = length > 0 ? <div style={{fontSize: 15, padding: 0, margin: 0}}>{index + 1} / {length}</div> : "-- / --";
+      const count = length > 0 ? <div className="counter">{index + 1} / {length}</div> : "-- / --";
 
       const renderedCards = cards.map((card) => {
          return (
@@ -62,6 +62,7 @@ const CarouselComp = ({
             </Carousel.Item>
          );
       });
+
 
       if (edit) {
          return (

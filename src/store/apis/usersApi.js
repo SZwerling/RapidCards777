@@ -38,6 +38,30 @@ const usersApi = createApi({
                };
             },
          }),
+         logoutUser: builder.mutation({
+            query: () => {
+               return {
+                  url: '/users/logout',
+                  method: "POST"
+               }
+            }
+         }),
+         logoutUserAll: builder.mutation({
+            query: () => {
+               return {
+                  url: '/users/logoutAll',
+                  method: "POST"
+               }
+            }
+         }),
+         deleteAccount: builder.mutation({
+            query: () => {
+               return {
+                  url: '/users/me',
+                  method: "DELETE"
+               }
+            }
+         }),
          fetchUsers: builder.query({
             query: () => {
                return {
@@ -108,6 +132,9 @@ export const {
    useFetchAvatarQuery,
    useAddUserMutation,
    useLoginUserMutation,
+   useLogoutUserMutation,
+   useLogoutUserAllMutation,
+   useDeleteAccountMutation,
    useAddAvatarMutation,
    useEditUserMutation,
    useRequestPasswordMutation,

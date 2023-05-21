@@ -8,9 +8,9 @@ const Welcome = () => {
    return (
       <>
          <Header>
-          <Container className="pl-1 pr-1">
+          <div className="container-fluid d-flex justify-content-around">
             <Nav.Item>
-               <div>RAPID CARDS</div>
+               <div className="rapid-cards">RAPID CARDS</div>
             </Nav.Item>
             <Nav.Item>
                <Link className="welcome-link" to="/addperson">
@@ -23,7 +23,7 @@ const Welcome = () => {
                   Log In
                </Link>
             </Nav.Item>
-            </Container>
+            </div>
          </Header>
          <div className="below-header container-fluid"></div>
       </>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Dropdown from 'react-bootstrap/Dropdown';
 import { useSelector } from "react-redux";
 import {
    useFetchCardsQuery,
@@ -7,6 +8,7 @@ import {
 } from "../store";
 import Row from "react-bootstrap/Row";
 import Carousel from "./Carousel";
+import Card from "./Card";
 import NewCard from "./NewCard";
 import LoadingCarousel from "./LoadingCarousel";
 
@@ -29,7 +31,7 @@ function DisplayCards() {
    let _id = useSelector((state) => state.cardReducer.cards);
    let fetchCardsObject = { _id: _id, sort: sort };
 
-   const { data, isLoading, isSuccess, isError, error } =
+   const { data, isLoading, isSuccess, refetch, isError, error } =
       useFetchCardsQuery(fetchCardsObject);
 
    let cards;
@@ -92,19 +94,41 @@ function DisplayCards() {
       cards = data.map((card) => {
          return { front: card.front, back: card.back, _id: card._id };
       });
-      content = (
-         <Carousel
-            cards={cards}
-            edit={edit}
-            setEdit={setEdit}
-            index={index}
-            setIndex={setIndex}
-            front={front}
-            setFront={setFront}
-            back={back}
-            setBack={setBack}
-         />
-      );
+      if(cards.length < 1) {
+         content = (
+            <div className="carousel-counter">
+        <>
+           <Carousel
+              className="carousel"
+              indicators={false}
+              interval={null}
+              touch={true}
+              controls={true}
+           >
+             <Carousel.Item>
+               <Card
+               ></Card>
+            </Carousel.Item>
+           </Carousel>
+        </>
+     </div>
+         )
+      } else {
+         content = (
+            <Carousel
+               cards={cards}
+               edit={edit}
+               setEdit={setEdit}
+               index={index}
+               setIndex={setIndex}
+               front={front}
+               setFront={setFront}
+               back={back}
+               setBack={setBack}
+            />
+         );
+      }
+      
    }
 
    if (showAddCard) {
@@ -126,19 +150,38 @@ function DisplayCards() {
          style={{ backgroundColor: "#F4F4F4", color: "#333333" }}
       >
          <Row>
-            <div className="col-md-4 pt-md-5">
-               <div onClick={() => setShowAddCard(!showAddCard)}>New Card</div>
-               {data?.length > 0 ? (
-                  <>
-                     <div onClick={handleEdit}>Edit</div>
-                     <div onClick={handleDelete}>Delete</div>
-                     <div onClick={handleSortAlph}>Alphabetcially</div>
-
-                     <div onClick={handleSortRecent}>Chronologically</div>
-                  </>
+            <div className="col-md-2 col-lg-1">
+               <Dropdown className="btn-group dropend" >
+                  <Dropdown.Toggle className="mt-2" type="button" id="dropdown1" variant="primary">
+                     Select
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                     <Dropdown.Item className="dropdown-item" onClick={() => setShowAddCard(!showAddCard)}>New Card</Dropdown.Item>
+                  {data?.length > 0 ? (
+                     <>
+                        <Dropdown.Item className="dropdown-item" onClick={handleEdit}>Edit</Dropdown.Item>
+                        <Dropdown.Item className="dropdown-item" onClick={handleDelete}>Delete</Dropdown.Item>
+                        <Dropdown.Item className="dropdown-item" onClick={handleSortAlph}>Alphabetcially</Dropdown.Item>
+                        <Dropdown.Item className="dropdown-item" onClick={handleSortRecent}>Chronologically</Dropdown.Item>
+                     </>
                ) : (
-                  <div></div>
+                  <Dropdown.Item></Dropdown.Item>
                )}
+                  </Dropdown.Menu>
+               </Dropdown>
+               <div className="alt-choices">
+                  <div className="alt-choice" onClick={() => setShowAddCard(!showAddCard)}><a style={{color: "#333333", position: "relative", zIndex: 20}} className="alt-choice-link">New Card</a></div>
+                  {data?.length > 0 ? (
+                  <>
+                     <div className="alt-choice" onClick={handleEdit}><a className="alt-choice-link" style={{color: "#333333", position: "relative", zIndex: 20}}>Edit</a></div>
+                     <div className="alt-choice" onClick={handleDelete}><a style={{color: "#333333", position: "relative", zIndex: 20}}>Delete</a></div>
+                     <div className="alt-choice" onClick={handleSortAlph}><a style={{color: "#333333", position: "relative", zIndex: 20}}>Alphabetcially</a></div>
+                     <div className="alt-choice" onClick={handleSortRecent}><a style={{color: "#333333", position: "relative", zIndex: 20}}>Chronologically</a></div>
+                  </>
+                  ) : (
+                     <div></div>
+                  )}
+               </div>
             </div>
             <div className="col">{content}</div>
          </Row>
@@ -150,3 +193,7 @@ export default DisplayCards;
 
 //  <AddCard setBack={setBack} setFront={setFront} handleAddCard={handleAddCard} _id={_id}/>
 //
+
+
+
+
