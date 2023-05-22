@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
 
 :root {
     --text-one: #333333;
@@ -7,9 +8,11 @@
     --main-blue: #0077cc;
     --card-green: #8feebd;
     --card-yellow: #fffb64;
-    --yellow-two: #ffc107;
+    --yellow-two: #fffb64;
     --red-one: #FF0000;
   }
+
+  /* --yellow-two: #ffc107; */
 
 *,
 *::before,

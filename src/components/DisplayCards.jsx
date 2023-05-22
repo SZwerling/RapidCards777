@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useSelector } from "react-redux";
 import {
@@ -7,20 +7,24 @@ import {
    useAddCardMutation,
 } from "../store";
 import Row from "react-bootstrap/Row";
-import Carousel from "./Carousel";
+import CarouselComp from "./CarouselComp";
+import Carousel from "react-bootstrap/Carousel";
 import Card from "./Card";
 import NewCard from "./NewCard";
 import LoadingCarousel from "./LoadingCarousel";
 
-function DisplayCards() {
+function DisplayCards({index, setIndex, showBack, setShowBack}) {
    const [edit, setEdit] = useState(false);
-   const [index, setIndex] = useState(0);
+   
    const [showAddCard, setShowAddCard] = useState(false);
    const [front, setFront] = useState("");
    const [newFront, setNewFront] = useState("");
    const [back, setBack] = useState("");
    const [newBack, setNewBack] = useState("");
    const [sort, setSort] = useState("");
+
+
+   
    const [
       deleteCard,
       { deleteData, deleteIsLoading, deleteIsError, deleteError },
@@ -76,6 +80,7 @@ function DisplayCards() {
       setIndex(0);
       setFront(cards[index].front);
       setBack(cards[index].back);
+      setShowBack(false)
    };
 
    const handleSortRecent = () => {
@@ -83,13 +88,14 @@ function DisplayCards() {
       setIndex(0);
       setFront(cards[index].front);
       setBack(cards[index].back);
+      setShowBack(false)
    };
 
    let content;
    if (isLoading) {
       content = <LoadingCarousel />;
    } else if (error) {
-      content = <Carousel />;
+      content = <CarouselComp showBack={showBack} setShowBack={setShowBack} />;
    } else {
       cards = data.map((card) => {
          return { front: card.front, back: card.back, _id: card._id };
@@ -98,7 +104,9 @@ function DisplayCards() {
          content = (
             <div className="carousel-counter">
         <>
-           <Carousel
+           <CarouselComp
+              showBack={showBack} 
+              setShowBack={setShowBack} 
               className="carousel"
               indicators={false}
               interval={null}
@@ -106,16 +114,17 @@ function DisplayCards() {
               controls={true}
            >
              <Carousel.Item>
-               <Card
-               ></Card>
+               <Card></Card>
             </Carousel.Item>
-           </Carousel>
+           </CarouselComp>
         </>
      </div>
          )
       } else {
          content = (
-            <Carousel
+            <CarouselComp
+               showBack={showBack} 
+               setShowBack={setShowBack} 
                cards={cards}
                edit={edit}
                setEdit={setEdit}
@@ -130,6 +139,7 @@ function DisplayCards() {
       }
       
    }
+
 
    if (showAddCard) {
       content = (
@@ -156,7 +166,7 @@ function DisplayCards() {
                      Select
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                     <Dropdown.Item className="dropdown-item" onClick={() => setShowAddCard(!showAddCard)}>New Card</Dropdown.Item>
+                     <Dropdown.Item className="dropdown-item" onClick={() => setShowAddCard(true)}>New Card</Dropdown.Item>
                   {data?.length > 0 ? (
                      <>
                         <Dropdown.Item className="dropdown-item" onClick={handleEdit}>Edit</Dropdown.Item>

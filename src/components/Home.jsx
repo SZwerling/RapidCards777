@@ -18,6 +18,10 @@ import fetchUser from "./FetchUser";
 
 const Home = () => {
    const [showInput, setShowInput] = useState(false);
+   const [index, setIndex] = useState(0);
+   const [showBack, setShowBack] = useState(false)
+   
+
    const dispatch = useDispatch();
 
    const { data, isLoading, isSuccess, isError, error } = useFetchDecksQuery();
@@ -39,7 +43,7 @@ const Home = () => {
          content = decks.map((deck) => {
             return (
                <Nav.Item key={deck._id}>
-                  <Deck _id={deck._id} deck={deck} />
+                  <Deck _id={deck._id} deck={deck} index={index} setIndex={setIndex} setShowBack={setShowBack}/>
                </Nav.Item>
             );
          });
@@ -113,7 +117,7 @@ const Home = () => {
                </Modal.Body>
             </Modal>
          )}
-         <DisplayCards />
+         <DisplayCards index={index} setIndex={setIndex} showBack={showBack} setShowBack={setShowBack} />
       </>
    );
 };

@@ -2,6 +2,10 @@ Header {
    background-color: var(--main-blue);
 }
 
+.btn-close {
+   font-size: 1rem;
+}
+
 .client-name {
    color: #474747 ;
    font-size: .8em;
@@ -51,7 +55,8 @@ Header {
 }
 
 .rapid-cards {
-   font-family: "Open Sans", sans-serif;
+   /* font-family: "Open Sans", sans-serif; */
+   font-family: 'Lato', sans-serif;
 }
 
 .avatar {
@@ -100,11 +105,11 @@ Link {
    font-size: 1rem;
    padding: 5px;
    margin: 0.5rem 0;
-   background-color: #FFC107;
+   background-color: var(--light-gray);
 }
 
 .add-deck-btn:hover {
-   background-color: whitesmoke;
+   background-color: var(--card-yellow);
 }
 
 .add-deck-form-input {
@@ -132,7 +137,7 @@ Link {
    border: 1px solid;
    padding: 3px;
    transition: 0.2s;
-   background-color: #ffc107;
+   background-color: var(--yellow-two);
 }
 
 .deck-icon:hover {

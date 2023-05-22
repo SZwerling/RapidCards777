@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
+import Modal1 from "./Modal1";
 import Header from "./Header";
 
 const Login = () => {
@@ -14,10 +14,15 @@ const Login = () => {
    const [email, setEmail] = useState("");
    const navigate = useNavigate();
    const [show, setShow] = useState(false);
+   const [show2, setShow2] = useState(false);
 
    const handleClose = () => {
       setShow(false);
       setEmail("");
+   };
+
+   const handleClose2 = () => {
+      setShow2(false);
    };
 
    const handleShow = () => setShow(true);
@@ -32,6 +37,26 @@ const Login = () => {
          handleClose();
       }
    };
+
+   const form = (
+      <Form onSubmit={handleEmailSubmit}>
+         <div className="form-group">
+            <label htmlFor="email">
+               <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  placeholder="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => {
+                     setEmail(e.target.value);
+                  }}
+               />
+            </label>
+         </div>
+      </Form>
+   );
 
    const dispatch = useDispatch();
 
@@ -51,7 +76,7 @@ const Login = () => {
          dispatch(setCredentials({ name, email, _id, avatar, token }));
          navigate("/home");
       } catch (error) {
-         console.log(error);
+         setShow2(true);
       }
    };
 
@@ -101,33 +126,18 @@ const Login = () => {
                   <a style={{ fontSize: "1rem" }} onClick={handleShow}>
                      forgot password
                   </a>
-                  <Modal centered show={show} onHide={handleClose}>
-                     <Modal.Header closeButton>
-                        <Modal.Title>
-                           enter email to be sent a temporary password
-                        </Modal.Title>
-                     </Modal.Header>
-                     <Modal.Body>
-                        <Form onSubmit={handleEmailSubmit}>
-                           <div className="form-group">
-                              <label htmlFor="email">
-                                 <input
-                                    type="email"
-                                    className="form-control"
-                                    id="email"
-                                    placeholder="email"
-                                    name="email"
-                                    value={email}
-                                    onChange={(e) => {
-                                       setEmail(e.target.value);
-                                    }}
-                                 />
-                              </label>
-                           </div>
-                        </Form>
-                     </Modal.Body>
-                     <Modal.Footer></Modal.Footer>
-                  </Modal>
+                  <Modal1
+                     body={<div>No such user found.</div>}
+                     title={<h1>Whoops!</h1>}
+                     show={show2}
+                     handleClose={handleClose2}
+                  />
+                  <Modal1
+                     body={<div><h6>You may reset your password here.</h6>{form}</div>}
+                     title={<h2>What's My Password?</h2>}
+                     show={show}
+                     handleClose={handleClose}
+                  />
                </div>
             </form>
          </div>

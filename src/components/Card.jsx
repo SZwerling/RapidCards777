@@ -1,4 +1,3 @@
-import { useRef, useState } from "react";
 import React from "react";
 
 const Card = ({ card, handleClick, showBack, quick }) => {

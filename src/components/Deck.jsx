@@ -5,21 +5,21 @@ import { GrEdit, GrTrash } from "react-icons/Gr";
 import { useEditDecksMutation, useDeleteDeckMutation } from "../store";
 
 
-function Deck({ deck }) {
+function Deck({ deck, setIndex, setShowBack }) {
    const [showEdit, setShowEdit] = useState(false);
    const [value, setValue] = useState("");
 
    let selectedId = useSelector((state) => state.cardReducer.cards);
 
+
    const [editDeck, { data, isLoading, isError, error }] = useEditDecksMutation();
-
    const [deleteDeck, { deletData, deleteIsLoading, deleteIsError, deleteError }] = useDeleteDeckMutation();
-
    const dispatch = useDispatch();
 
    const handleClick = (_id) => {
       dispatch(setCards(_id));
-      //album id going to cardsSlice
+      setIndex(0)
+      setShowBack(false)
    };
 
    const handleDelete = (_id) => {
