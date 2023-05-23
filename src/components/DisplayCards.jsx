@@ -116,7 +116,7 @@ function DisplayCards({index, setIndex, showBack, setShowBack, showAddCard, setS
               controls={true}
            >
              <Carousel.Item>
-               <Card>fake from display cards</Card>
+               <Card></Card>
             </Carousel.Item>
            </CarouselComp>
         </>

@@ -52,6 +52,7 @@ function Deck({ deck, setIndex, setShowBack, index, setShowAddCard, setEdit }) {
       return (
          <form onSubmit={handleEditSubmit}>
             <input
+               spellCheck="false"
                autoFocus
                placeholder={deck.name}
                value={value}

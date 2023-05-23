@@ -53,6 +53,7 @@ function AddPerson() {
                         className="form-control"
                         id="nameInput"
                         placeholder="name"
+                        autoFocus="autoFocus"
                         name="name"
                         onChange={handleChange}
                         value={inputs.name || ""}

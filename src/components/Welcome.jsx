@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Nav from "react-bootstrap/Nav";
-import Container from 'react-bootstrap/Container';
+import VideoSnipp from "../assets/video.mp4"
 
 const Welcome = () => {
    return (
@@ -25,7 +25,13 @@ const Welcome = () => {
             </Nav.Item>
             </div>
          </Header>
-         <div className="below-header container-fluid"></div>
+         <div className="below-header container-fluid">
+            <div className="video-container">
+               <video  autoPlay loop muted >
+                  <source src={VideoSnipp} type="video/mp4"/>
+               </video>
+            </div>
+         </div>
       </>
    );
 };

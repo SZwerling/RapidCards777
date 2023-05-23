@@ -59,12 +59,12 @@ Header {
 }
 
 .rapid-cards {
-   /* font-family: "Open Sans", sans-serif; */
    font-family: 'Lato', sans-serif;
 }
 
 .avatar {
    width: 5rem !important;
+   height: 5rem !important;
 }
 
 a {
@@ -217,6 +217,7 @@ Link {
 }
 
 .card-edit-container {
+   font-size: 1.5rem;
    width: 90vw;
    position: relative;
    margin: 2rem 0;
@@ -300,7 +301,26 @@ Link {
    height: 100vh;
 }
 
+.video-container {
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   
+}
+
+video {
+   height: 25rem;
+   width: auto;
+   margin: 2rem auto;
+}
+
 @media only screen and (min-width: 580px) {
+   video {
+      height: 26rem;
+      width: auto;
+      margin: 2rem auto;
+   }
+
    .carousel {
       width: 35rem;
    }
@@ -344,6 +364,12 @@ Link {
 }
 
 @media only screen and (min-width: 768px) {
+   video {
+      height: 28rem;
+      width: auto;
+      margin: 2rem auto;
+   }
+
    .carousel-control-prev {
       display: inline-block;
       top: 50%;
@@ -359,6 +385,16 @@ Link {
 }
 
 @media only screen and (min-width: 876px) {
+   .video-container {
+     
+   }
+
+   video {
+      height: 35rem;
+      width: auto;
+      margin: 2rem auto;
+   }
+
    #dropdown1 {
       visibility: hidden;
    }
@@ -397,6 +433,7 @@ Link {
 
    .avatar {
       width: 7rem !important;
+      height: 7rem !important;
    }
 }
 

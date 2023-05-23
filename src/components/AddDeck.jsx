@@ -24,7 +24,7 @@ function AddDeck({showInput, setShowInput, show}) {
    if (showInput) {
       return (
          <form className="add-deck-form" onSubmit={handleAddDeck}>
-            <input className="add-deck-form-input add-deck-component" autoFocus value={currentValue} onChange={(e) => setCurrentValue(e.target.value)}/>
+            <input spellCheck="false" className="add-deck-form-input add-deck-component" autoFocus value={currentValue} onChange={(e) => setCurrentValue(e.target.value)}/>
             {show && (<span> &#x270E; add your first deck</span>)}
          </form>
       );
