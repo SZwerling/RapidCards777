@@ -28,6 +28,10 @@ Header {
    font-size: 0.9rem;
 }
 
+#dropdown1 {
+   margin-top: 1rem;
+}
+
 #dropdown-basic-button-2 {
    color: var(--text-one);
    font-size: 0.9rem;

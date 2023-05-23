@@ -13,10 +13,10 @@ import Card from "./Card";
 import NewCard from "./NewCard";
 import LoadingCarousel from "./LoadingCarousel";
 
-function DisplayCards({index, setIndex, showBack, setShowBack}) {
-   const [edit, setEdit] = useState(false);
+function DisplayCards({index, setIndex, showBack, setShowBack, showAddCard, setShowAddCard, edit, setEdit}) {
+   // const [edit, setEdit] = useState(false);
    
-   const [showAddCard, setShowAddCard] = useState(false);
+   // const [showAddCard, setShowAddCard] = useState(false);
    const [front, setFront] = useState("");
    const [newFront, setNewFront] = useState("");
    const [back, setBack] = useState("");
@@ -73,6 +73,7 @@ function DisplayCards({index, setIndex, showBack, setShowBack}) {
       deleteCard(cards[index]._id);
       const newIndex = index - 1;
       setIndex(newIndex < 0 ? cards.length - 2 : newIndex);
+      setShowBack(false)
    };
 
    const handleSortAlph = () => {
@@ -90,6 +91,7 @@ function DisplayCards({index, setIndex, showBack, setShowBack}) {
       setBack(cards[index].back);
       setShowBack(false)
    };
+
 
    let content;
    if (isLoading) {
@@ -114,7 +116,7 @@ function DisplayCards({index, setIndex, showBack, setShowBack}) {
               controls={true}
            >
              <Carousel.Item>
-               <Card></Card>
+               <Card>fake from display cards</Card>
             </Carousel.Item>
            </CarouselComp>
         </>
@@ -161,26 +163,26 @@ function DisplayCards({index, setIndex, showBack, setShowBack}) {
       >
          <Row>
             <div className="col-md-2 col-lg-1">
-               <Dropdown className="btn-group dropend" >
-                  <Dropdown.Toggle className="mt-2" type="button" id="dropdown1" variant="primary">
-                     Select
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                     <Dropdown.Item className="dropdown-item" onClick={() => setShowAddCard(true)}>New Card</Dropdown.Item>
+               <div className="dropdown" id="dropdown1">
+                  <button className="btn btn-primary dropdown-toggle" type="button" id="#dropdown-basic-button-1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Select
+               </button>
+               <ul className="dropdown-menu" aria-labelledby="#dropdown-basic-button-1">
+                     <li className="dropdown-item" onClick={() => setShowAddCard(true)}>New Card</li>
                   {data?.length > 0 ? (
                      <>
-                        <Dropdown.Item className="dropdown-item" onClick={handleEdit}>Edit</Dropdown.Item>
-                        <Dropdown.Item className="dropdown-item" onClick={handleDelete}>Delete</Dropdown.Item>
-                        <Dropdown.Item className="dropdown-item" onClick={handleSortAlph}>Alphabetcially</Dropdown.Item>
-                        <Dropdown.Item className="dropdown-item" onClick={handleSortRecent}>Chronologically</Dropdown.Item>
+                        <li className="dropdown-item" onClick={handleEdit}>Edit</li>
+                        <li className="dropdown-item" onClick={handleDelete}>Delete</li>
+                        <li className="dropdown-item" onClick={handleSortAlph}>Alphabetcially</li>
+                        <li className="dropdown-item" onClick={handleSortRecent}>Chronologically</li>
                      </>
                ) : (
-                  <Dropdown.Item></Dropdown.Item>
+                  <ul></ul>
                )}
-                  </Dropdown.Menu>
-               </Dropdown>
+                  </ul>
+               </div>
                <div className="alt-choices">
-                  <div className="alt-choice" onClick={() => setShowAddCard(!showAddCard)}><a style={{color: "#333333", position: "relative", zIndex: 20}} className="alt-choice-link">New Card</a></div>
+                  <div className="alt-choice" onClick={() => setShowAddCard(true)}><a style={{color: "#333333", position: "relative", zIndex: 20}} className="alt-choice-link">New Card</a></div>
                   {data?.length > 0 ? (
                   <>
                      <div className="alt-choice" onClick={handleEdit}><a className="alt-choice-link" style={{color: "#333333", position: "relative", zIndex: 20}}>Edit</a></div>

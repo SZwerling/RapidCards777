@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useFetchDecksQuery } from "../store";
 import { setCards } from "../store/slices/cardSlice";
@@ -16,10 +16,12 @@ import AddDeck from "./AddDeck";
 import Deck from "./Deck";
 import fetchUser from "./FetchUser";
 
-const Home = () => {
+const Home = ({img}) => {
    const [showInput, setShowInput] = useState(false);
    const [index, setIndex] = useState(0);
    const [showBack, setShowBack] = useState(false)
+   const [showAddCard, setShowAddCard] = useState(false);
+   const [edit, setEdit] = useState(false);
    
 
    const dispatch = useDispatch();
@@ -31,6 +33,7 @@ const Home = () => {
    let content;
 
    let clientName = fetchUser();
+   
 
    if (isLoading) {
       content = "";
@@ -43,7 +46,16 @@ const Home = () => {
          content = decks.map((deck) => {
             return (
                <Nav.Item key={deck._id}>
-                  <Deck _id={deck._id} deck={deck} index={index} setIndex={setIndex} setShowBack={setShowBack}/>
+                  <Deck 
+                  _id={deck._id} 
+                  deck={deck} 
+                  index={index} 
+                  setIndex={setIndex} 
+                  setShowBack={setShowBack} 
+                  setShowAddCard={setShowAddCard}
+                  setEdit={setEdit}
+                  
+                  />
                </Nav.Item>
             );
          });
@@ -69,6 +81,20 @@ const Home = () => {
       e.target.src = emptyAvatar;
    };
 
+   
+   const fetchImage = useCallback(async () => {
+      const res = await fetch(`http://localhost:3000/users/${clientName?._id}/avatar`);
+         const imageBlob = await res.blob()
+         const imageObjectURL = URL.createObjectURL(imageBlob);
+         setImg(imageObjectURL);
+    }, []);
+
+    useEffect(() => {
+      fetchImage();
+    }, [fetchImage]);
+
+    
+
    return (
       <>
          <Header>
@@ -76,7 +102,7 @@ const Home = () => {
                <Navbar.Brand>
                   <Link className="link" state={clientName} to="/profile">
                      <img
-                        src={`http://localhost:3000/users/${clientName._id}/avatar`}
+                        src={img || `http://localhost:3000/users/${clientName?._id}/avatar`}
                         className="rounded-circle d-inline-block align-top avatar"
                         alt="Avatar"
                         onError={onImageError}
@@ -117,7 +143,16 @@ const Home = () => {
                </Modal.Body>
             </Modal>
          )}
-         <DisplayCards index={index} setIndex={setIndex} showBack={showBack} setShowBack={setShowBack} />
+         <DisplayCards 
+         index={index} 
+         setIndex={setIndex} 
+         showBack={showBack} 
+         setShowBack={setShowBack} 
+         showAddCard={showAddCard} 
+         setShowAddCard={setShowAddCard}
+         edit={edit}
+         setEdit={setEdit}
+         />
       </>
    );
 };
