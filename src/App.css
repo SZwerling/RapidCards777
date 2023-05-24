@@ -6,6 +6,10 @@ Header {
    font-size: 1rem;
 }
 
+.study-img-container {
+   display: none;
+}
+
 .client-name {
    color: #474747 ;
    font-size: .8em;
@@ -288,8 +292,8 @@ Link {
    height: 84.3vh;
    width: 100%;
    
-   background-size: cover;
-   background-position: center;
+   /* background-size: cover;
+   background-position: center; */
 }
 
 .below-header form {
@@ -344,6 +348,29 @@ video {
 
 
 @media only screen and (min-width: 580px) {
+   .addPerson-container {
+      display: flex;
+      flex-direction: row;
+      padding: 0;
+   }
+
+   .add-person-form {
+      padding-top: 1rem;
+      width: 50vw;
+      margin-left: .01rem;
+   }
+
+   .study-img-container {
+      display: inline-block;
+      width: 50vw;
+   }
+
+   .study-img {
+     width: 100%;
+     height: 84.3vh;
+     object-fit: cover;
+   }
+
    .welcome-page { 
       font-size: 1.2rem;
    }
@@ -515,6 +542,9 @@ video {
    }
    .profile-header {
       padding-right: 13rem;
+   }
+   .study-img-container {
+      width: 49vw;
    }
 }
 

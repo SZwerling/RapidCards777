@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import studyImg from "../assets/study.jpg"
 import Header from "./Header";
 
 function AddPerson() {
@@ -44,14 +45,17 @@ function AddPerson() {
                <div className="rapid-cards">RAPID CARDS</div>
             </div>
          </Header>
-         <div className="below-header container-fluid">
-            <form className="row pb-5" onSubmit={handleAddUser}>
-               <div className="form-group justify-space-evenly mb-2">
-                  <label>
+         <div className="below-header container-fluid addPerson-container">
+            <div className="study-img-container">
+               <img className="study-img" src={studyImg} alt="people studying" />
+            </div>
+            <form className="row pb-5 add-person-form" onSubmit={handleAddUser}>
+               <div className="form-group justify-space-evenly mb-2 mt-2">
+                  <label htmlFor="name">
                      Name:
                      <input
-                        className="form-control"
-                        id="nameInput"
+                        className="form-control mb-2"
+                        id="name"
                         placeholder="name"
                         autoFocus="autoFocus"
                         name="name"
@@ -60,7 +64,7 @@ function AddPerson() {
                         type="text"
                      />
                   </label>
-                  <div className="form-group justify-space-evenly mb-2">
+                  <div className="form-group justify-space-evenly mb-2 mt-2">
                      <label>
                         Email
                         <input
@@ -87,7 +91,7 @@ function AddPerson() {
                      </label>
                   </div>
                   <div>
-                     <button className="btn btn-primary">submit</button>
+                     <button type="submit" className="btn btn-primary">submit</button>
                   </div>
                </div>
             </form>

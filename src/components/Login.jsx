@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Modal1 from "./Modal1";
 import Header from "./Header";
+import studyImg from "../assets/study.jpg";
 
 const Login = () => {
    const [inputs, setInputs] = useState("");
@@ -87,14 +88,22 @@ const Login = () => {
                <div className="rapid-cards">RAPID CARDS</div>
             </div>
          </Header>
-         <div className="below-header container-fluid">
-            <form className="row pb-3" onSubmit={handleAddUser}>
-               <div className="form-group justify-space-evenly mb-2">
+         <div className="below-header container-fluid addPerson-container">
+            <div className="study-img-container">
+               <img
+                  className="study-img"
+                  src={studyImg}
+                  alt="people studying"
+               />
+            </div>
+            <form className="row pb-5 add-person-form" onSubmit={handleAddUser}>
+               <div className="form-group justify-space-evenly mb-2 mt-2"> 
                   <label htmlFor="emailInput">
                      Email
                      <input
+                        autoFocus="autoFocus"
                         type="email"
-                        className="form-control"
+                        className="form-control mb-2"
                         id="emailInput"
                         placeholder="email"
                         name="email"
@@ -102,42 +111,47 @@ const Login = () => {
                         onChange={handleChange}
                      />
                   </label>
-               </div>
-               <div className="form-group justify-space-evenly mb-2">
-                  <label htmlFor="passwordInput">
-                     Password
-                     <input
-                        type="password"
-                        className="form-control"
-                        id="passwordInput"
-                        placeholder="password"
-                        name="password"
-                        value={inputs.password || ""}
-                        onChange={handleChange}
+                  <div className="form-group justify-space-evenly mb-2 mt-2">
+                     <label htmlFor="passwordInput">
+                        Password
+                        <input
+                           type="password"
+                           className="form-control"
+                           id="passwordInput"
+                           placeholder="password"
+                           name="password"
+                           value={inputs.password || ""}
+                           onChange={handleChange}
+                        />
+                     </label>
+                  </div>
+                  <div>
+                     <button type="submit" className="btn btn-primary">
+                        submit
+                     </button>
+                  </div>
+                  <div className="mt-3">
+                     <a style={{ fontSize: "1rem" }} onClick={handleShow}>
+                        forgot password
+                     </a>
+                     <Modal1
+                        body={<div>No such user found.</div>}
+                        title={<h1>Whoops!</h1>}
+                        show={show2}
+                        handleClose={handleClose2}
                      />
-                  </label>
-               </div>
-               <div>
-                  <button type="submit" className="btn btn-primary">
-                     submit
-                  </button>
-               </div>
-               <div className="mt-3">
-                  <a style={{ fontSize: "1rem" }} onClick={handleShow}>
-                     forgot password
-                  </a>
-                  <Modal1
-                     body={<div>No such user found.</div>}
-                     title={<h1>Whoops!</h1>}
-                     show={show2}
-                     handleClose={handleClose2}
-                  />
-                  <Modal1
-                     body={<div><h6>You may reset your password here.</h6>{form}</div>}
-                     title={<h2>What's My Password?</h2>}
-                     show={show}
-                     handleClose={handleClose}
-                  />
+                     <Modal1
+                        body={
+                           <div>
+                              <h6>You may reset your password here.</h6>
+                              {form}
+                           </div>
+                        }
+                        title={<h2>What's My Password?</h2>}
+                        show={show}
+                        handleClose={handleClose}
+                     />
+                  </div>
                </div>
             </form>
          </div>
