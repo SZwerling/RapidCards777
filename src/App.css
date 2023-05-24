@@ -253,6 +253,7 @@ Link {
    width: 100%;
    height: 51%;
 }
+
 .card-edit-2 {
    background-color: var(--card-yellow);
    cursor: pointer;
@@ -273,6 +274,7 @@ Link {
 .carousel-control-prev {
    display: none;
 }
+
 .carousel-control-next {
    display: none;
 }
@@ -301,24 +303,51 @@ Link {
    height: 100vh;
 }
 
-.video-container {
-   width: 100%;
+.welcome-page {
+   padding: 0 1rem;
    display: flex;
-   flex-direction: row;
-   
+   flex-direction: column;
+   align-items: center;
+   font-size: 1rem;
+   background: url("../src/assets/colored-squares.jpg");
+   background-size: cover;
+   background-position: center;
+}
+
+.video-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   text-transform: capitalize;
+   text-align: center;
+   padding: .5rem;
+   margin-top: 1rem;
+   background-color: rgba(244, 244, 244, .7);
 }
 
 video {
    height: 25rem;
-   width: auto;
-   margin: 2rem auto;
+}
+
+.intro-text-1 {
+   padding-top: 1rem;
+}
+
+.text-paragraph {
+   background-color: rgba(244, 244, 244, .9);
+   padding: .5rem;
+}
+
+.text-paragraph-hidden {
+   display: none;
 }
 
 @media only screen and (min-width: 580px) {
+   .welcome-page { 
+      font-size: 1.2rem;
+   }
    video {
       height: 26rem;
-      width: auto;
-      margin: 2rem auto;
    }
 
    .carousel {
@@ -364,11 +393,27 @@ video {
 }
 
 @media only screen and (min-width: 768px) {
-   video {
-      height: 28rem;
-      width: auto;
-      margin: 2rem auto;
+   .welcome-page {
+      flex-direction: row;
+      align-items: flex-start;
    }
+
+   .text-paragraph {
+      margin: 1rem;
+      padding: 1rem;
+      line-height: 2em;
+   }
+
+
+   .intro-text-1 {
+      padding-top: 0;
+      order: -1;
+   }
+
+   .video-container {
+      margin: 1rem;
+   }
+
 
    .carousel-control-prev {
       display: inline-block;
@@ -385,14 +430,9 @@ video {
 }
 
 @media only screen and (min-width: 876px) {
-   .video-container {
-     
-   }
 
-   video {
-      height: 35rem;
-      width: auto;
-      margin: 2rem auto;
+   .text-paragraph-hidden {
+      display: inline-block;
    }
 
    #dropdown1 {
