@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { setCards } from "../store/slices/cardSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { GrEdit, GrTrash } from "react-icons/Gr";
+// import { GrEdit, GrTrash } from "react-icons/Gr";
 import { useEditDecksMutation, useDeleteDeckMutation } from "../store";
 
 
@@ -65,10 +65,10 @@ function Deck({ deck, setIndex, setShowBack, index, setShowAddCard, setEdit, set
       return (
          <div className="deck">
             {selectedId === deck._id ? (
-               <GrEdit
+               <div
                   className="deck-icon"
                   onClick={() => handleShowEdit(deck._id)}
-               />
+               >&#128393;</div>
             ) : (
                ""
             )}
@@ -77,10 +77,10 @@ function Deck({ deck, setIndex, setShowBack, index, setShowAddCard, setEdit, set
                {deck.name}
             </div>
             {selectedId === deck._id ? (
-               <GrTrash
+               <div 
                   className="deck-icon"
                   onClick={() => handleDelete(deck._id)}
-               />
+               >&#128465;</div>
             ) : (
                ""
             )}
