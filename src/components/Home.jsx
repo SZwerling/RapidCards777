@@ -36,9 +36,10 @@ const Home = ({img}) => {
    let clientName = fetchUser();
 
    useEffect(() => {
-      setIndex(0)
-      console.log(`set index to ${index}`)
+      setIndex(index * 0)
    }, [currentDeck])
+
+  
    
 
    if (isLoading) {
