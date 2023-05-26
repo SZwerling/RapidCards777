@@ -22,7 +22,8 @@ const Home = ({img}) => {
    const [showBack, setShowBack] = useState(false)
    const [showAddCard, setShowAddCard] = useState(false);
    const [edit, setEdit] = useState(false);
-   
+   const [currentDeck, setCurrentDeck] = useState(null)
+ 
 
    const dispatch = useDispatch();
 
@@ -33,6 +34,11 @@ const Home = ({img}) => {
    let content;
 
    let clientName = fetchUser();
+
+   useEffect(() => {
+      setIndex(0)
+      console.log(`set index to ${index}`)
+   }, [currentDeck])
    
 
    if (isLoading) {
@@ -54,6 +60,7 @@ const Home = ({img}) => {
                   setShowBack={setShowBack} 
                   setShowAddCard={setShowAddCard}
                   setEdit={setEdit}
+                  setCurrentDeck={setCurrentDeck}
                   
                   />
                </Nav.Item>
@@ -83,7 +90,7 @@ const Home = ({img}) => {
 
    
    const fetchImage = useCallback(async () => {
-      const res = await fetch(`http://localhost:3000/users/${clientName?._id}/avatar`);
+      const res = await fetch(`https://zwerling-flashcard-api.herokuapp.com/users/${clientName?._id}/avatar`);
          const imageBlob = await res.blob()
          const imageObjectURL = URL.createObjectURL(imageBlob);
          setImg(imageObjectURL);
@@ -102,7 +109,7 @@ const Home = ({img}) => {
                <Navbar.Brand>
                   <Link className="link" state={clientName} to="/profile">
                      <img
-                        src={img || `http://localhost:3000/users/${clientName?._id}/avatar`}
+                        src={img || `https://zwerling-flashcard-api.herokuapp.com/users/${clientName?._id}/avatar`}
                         className="rounded-circle d-inline-block align-top avatar"
                         alt="Avatar"
                         onError={onImageError}

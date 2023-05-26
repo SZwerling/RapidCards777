@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const usersApi = createApi({
    reducerPath: "users",
    baseQuery: fetchBaseQuery({
-      baseUrl: "http://localhost:3000",
+      baseUrl: "https://zwerling-flashcard-api.herokuapp.com",
       //  credentials: 'include',
       prepareHeaders: (headers, { getState }) => {
          // const token = getState().auth.token

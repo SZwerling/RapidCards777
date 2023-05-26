@@ -46,7 +46,7 @@ function Profile({ img, setImg }) {
    };
 
    const fetchImage = useCallback(async () => {
-      const res = await fetch(`http://localhost:3000/users/${id}/avatar`);
+      const res = await fetch(`https://zwerling-flashcard-api.herokuapp.com/users/${id}/avatar`);
       const imageBlob = await res.blob();
       const imageObjectURL = URL.createObjectURL(imageBlob);
       setImg(imageObjectURL);
@@ -63,9 +63,6 @@ function Profile({ img, setImg }) {
          return alert("image must be less then one megabyte");
       }
 
-      // if (file) {
-      //    setPreview(URL.createObjectURL(file));
-      // }
       if (inputs) {
          editUser(inputs);
       }

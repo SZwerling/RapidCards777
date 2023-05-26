@@ -5,7 +5,7 @@ import { GrEdit, GrTrash } from "react-icons/Gr";
 import { useEditDecksMutation, useDeleteDeckMutation } from "../store";
 
 
-function Deck({ deck, setIndex, setShowBack, index, setShowAddCard, setEdit }) {
+function Deck({ deck, setIndex, setShowBack, index, setShowAddCard, setEdit, setCurrentDeck }) {
    const [showEdit, setShowEdit] = useState(false);
    const [value, setValue] = useState("");
 
@@ -18,15 +18,16 @@ function Deck({ deck, setIndex, setShowBack, index, setShowAddCard, setEdit }) {
 
    const handleClick = (_id) => {
       dispatch(setCards(_id));
-      setIndex(index * 0)
+      // setIndex(index * 0)
       setShowBack(false)
       setShowAddCard(false)
       setEdit(false)
+      setCurrentDeck(_id)
    };
 
    const handleDelete = (_id) => {
       deleteDeck(_id);
-      setIndex(index * 0)
+      // setIndex(index * 0)
    };
 
    const handleShowEdit = () => {

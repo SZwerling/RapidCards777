@@ -97,7 +97,23 @@ function DisplayCards({index, setIndex, showBack, setShowBack, showAddCard, setS
    if (isLoading) {
       content = <LoadingCarousel />;
    } else if (error) {
-      content = <CarouselComp showBack={showBack} setShowBack={setShowBack} />;
+      content =  <div className="carousel-counter">
+      <>
+         <Carousel
+            className="carousel"
+            indicators={false}
+            interval={null}
+            touch={true}
+            controls={true}
+         >
+           <Carousel.Item>
+             <Card
+             ></Card>
+          </Carousel.Item>
+         </Carousel>
+      </>
+      -- / --
+   </div>;
    } else {
       cards = data.map((card) => {
          return { front: card.front, back: card.back, _id: card._id };
@@ -162,6 +178,7 @@ function DisplayCards({index, setIndex, showBack, setShowBack, showAddCard, setS
          style={{ backgroundColor: "#F4F4F4", color: "#333333" }}
       >
          <Row>
+            
             <div className="col-md-2 col-lg-1">
                <div className="dropdown" id="dropdown1">
                   <button className="btn btn-primary dropdown-toggle" type="button" id="#dropdown-basic-button-1" data-bs-toggle="dropdown" aria-expanded="false">

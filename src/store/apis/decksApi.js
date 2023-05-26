@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
+//"https://localhost:3000"
+//"https://zwerling-flashcard-api.herokuapp.com"
 const decksApi = createApi({
    reducerPath: "decks",
    baseQuery: fetchBaseQuery({
-      baseUrl: "http://localhost:3000",
+      baseUrl: "https://zwerling-flashcard-api.herokuapp.com",
       prepareHeaders: (headers, { getState }) => {
          //const token = getState().auth.token;
          const token = localStorage.getItem("jwt")
