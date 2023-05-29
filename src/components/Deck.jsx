@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { setCards } from "../store/slices/cardSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { GrEdit, GrTrash } from "react-icons/Gr";
+import { GrEdit, GrTrash } from "react-icons/gr";
 import { useEditDecksMutation, useDeleteDeckMutation } from "../store";
 
 
