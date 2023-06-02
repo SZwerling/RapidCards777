@@ -6,11 +6,11 @@ function LoadingCarousel() {
       <div className="carousel-counter">
          <Carousel>
             <Carousel.Item>
-               <div style={{ backgroundColor: "gray" }} className="outer-card">
+               <div className="outer-card">
                   <div className="card ">
                      <div
                         style={{ backgroundColor: "gray" }}
-                        className="card-body card__face card__face--front"
+                        className="card-body card__face card__face--front shimmerBG"
                      ></div>
                   </div>
                </div>

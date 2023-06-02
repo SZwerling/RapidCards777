@@ -177,6 +177,35 @@ Link {
    width: 100%;
 }
 
+.shimmerBG {
+   animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: shimmer;
+    animation-timing-function: linear;
+    background: #ddd;
+    background: linear-gradient(to right, var(--card-green), var(--light-gray), var(--card-green));
+    background-size: 1200px 100%;
+}
+
+@-webkit-keyframes shimmer {
+   0% {
+       background-position: -100% 0;
+   }
+   100% {
+       background-position: 100% 0;
+   }
+}
+
+@keyframes shimmer {
+   0% {
+       background-position: -1200px 0;
+   }
+   100% {
+       background-position: 1200px 0;
+   }
+}
+
 /* CURRENTLY SETTING HEIGHT HERE */
 .card {
    font-size: 2rem;
