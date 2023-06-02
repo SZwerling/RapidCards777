@@ -291,14 +291,9 @@ Link {
 .below-header {
    height: 84.3vh;
    width: 100%;
-   
-   /* background-size: cover;
-   background-position: center; */
-}
-
-.below-header form {
    background-color: rgba(143, 238, 189, 0.4);
 }
+
 
 .update-profile {
    background: url("../src/assets/colored-squares.jpg");
@@ -501,6 +496,9 @@ video {
 }
 
 @media only screen and (min-width: 1025px) {
+   .addPerson-container {
+      background-color: rgba(143, 238, 189, 0.4)
+   }
    .welcome-page {
       margin: 0 7rem;
    }
