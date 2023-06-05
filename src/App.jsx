@@ -1,7 +1,5 @@
-import GetProfile from "./components/GetProfile";
 import AddPerson from "./components/AddPerson";
 import { Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Welcome from "./components/Welcome";
@@ -17,8 +15,6 @@ function App() {
    const [img, setImg] = useState('');
    return (
       <Routes>
-         {/* <Route path="/" element={<Layout />} /> */}
-         {/* public routes */}
          <Route index element={<Welcome />} />
          <Route path="welcome" element={<Welcome />} />
          <Route path="addperson" element={<AddPerson />} />
